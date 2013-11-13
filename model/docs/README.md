@@ -1,4 +1,4 @@
-OpenAdvertisingProtocol
+Open Advertising Protocol Model Documentation
 =======================
 
-This is the main repository for the Open Advertising Protocol.
+This is where we post the documentation for the Open Advertising Protocol's Model
