@@ -20,33 +20,33 @@
 			<xs:element name="lineItems">
 				<xs:complexType>
 					<xs:sequence maxOccurs="unbounded">
-						<xs:element name="lineItem">
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="name"/>
-									<xs:element name="buyerId"/>
-									<xs:element name="sellerId"/>
-									<xs:element name="program">
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="id" type="xs:IDREF" minOccurs="0"/>
-												<xs:element name="name"/>
-											</xs:sequence>
-										</xs:complexType>
-									</xs:element>
-									<xs:element name="placement" type="Placement"/>
-									<xs:element name="targeting"/>
-									<xs:element name="flightDates" type="TimeSpan"/>
-									<xs:element name="quantity"/>
-									<xs:element name="rate"/>
-									<xs:element name="amount"/>
-									<xs:element name="isGuaranteed" type="xs:boolean"/>
-									<xs:element name="notes"/>
-								</xs:sequence>
-							</xs:complexType>
-						</xs:element>
 						<xs:choice>
 							<xs:element name="package"/>
+							<xs:element name="lineItem">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="name"/>
+										<xs:element name="buyerId"/>
+										<xs:element name="sellerId"/>
+										<xs:element name="program">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="id" type="xs:IDREF" minOccurs="0"/>
+													<xs:element name="name"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="placement" type="Placement"/>
+										<xs:element name="targeting"/>
+										<xs:element name="flightDates" type="TimeSpan"/>
+										<xs:element name="quantity"/>
+										<xs:element name="rate"/>
+										<xs:element name="amount"/>
+										<xs:element name="isGuaranteed" type="xs:boolean"/>
+										<xs:element name="notes"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
 						</xs:choice>
 					</xs:sequence>
 				</xs:complexType>
