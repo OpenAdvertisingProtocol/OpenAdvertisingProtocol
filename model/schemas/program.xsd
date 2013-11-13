@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:include schemaLocation="file:///C:/Users/jpych/Documents/GitHub/OpenAdvertisingProtocol/model/schemas/common.xsd"/>
+	<xs:element name="program" type="Program">
+		<xs:annotation>
+			<xs:documentation>this element represents an advertising program</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="Program">
+		<xs:annotation>
+			<xs:documentation>this data type represents an advertising program</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name"/>
+			<xs:element name="seller" type="Transactor"/>
+			<xs:element name="description"/>
+			<xs:element name="placements">
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="placement" type="Placement"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="Placement">
+		<xs:annotation>
+			<xs:documentation>this data type represents a placement within an advertising program</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs="1" maxOccurs="1">
+			<xs:element name="name"/>
+			<xs:element name="standardRate" type="Rate" minOccurs="0"/>
+			<xs:element name="adUnit"/>
+			<xs:element name="channel" type="Channel"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID"/>
+	</xs:complexType>
+	<xs:simpleType name="Channel">
+		<xs:annotation>
+			<xs:documentation>the type of channel</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="email"/>
+			<xs:enumeration value="onlineDisplay"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

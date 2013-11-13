@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:include schemaLocation="file:///C:/Users/jpych/Documents/GitHub/OpenAdvertisingProtocol/model/schemas/common.xsd"/>
+	<xs:include schemaLocation="file:///C:/Users/jpych/Documents/GitHub/OpenAdvertisingProtocol/model/schemas/program.xsd"/>
+	<xs:element name="order" type="Order">
+		<xs:annotation>
+			<xs:documentation>This is an insertion order element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="Order">
+		<xs:annotation>
+			<xs:documentation>This is the insertion order data type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="buyer" type="Transactor"/>
+			<xs:element name="seller" type="Transactor"/>
+			<xs:element name="advertiser" type="Transactor"/>
+			<xs:element name="flightDates" type="TimeSpan"/>
+			<xs:element name="lineItems">
+				<xs:complexType>
+					<xs:sequence maxOccurs="unbounded">
+						<xs:element name="lineItem">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="name"/>
+									<xs:element name="buyerId"/>
+									<xs:element name="sellerId"/>
+									<xs:element name="program">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="id" type="xs:IDREF" minOccurs="0"/>
+												<xs:element name="name"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="placement" type="Placement"/>
+									<xs:element name="targeting"/>
+									<xs:element name="flightDates" type="TimeSpan"/>
+									<xs:element name="quantity"/>
+									<xs:element name="rate"/>
+									<xs:element name="amount"/>
+									<xs:element name="isGuaranteed" type="xs:boolean"/>
+									<xs:element name="notes"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:choice>
+							<xs:element name="package"/>
+						</xs:choice>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="notes"/>
+			<xs:element name="terms"/>
+			<xs:element name="amount" type="Money"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID"/>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:complexType name="Person">
+		<xs:annotation>
+			<xs:documentation>data type representing a person</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="firstName"/>
+			<xs:element name="lastName"/>
+			<xs:element name="jobTitle" minOccurs="0"/>
+			<xs:element name="company">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="name"/>
+						<xs:element name="id" type="xs:IDREF"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="email" type="EmailAddress"/>
+			<xs:element name="workPhone" type="PhoneNumber" minOccurs="0"/>
+			<xs:element name="mobilePhone" type="PhoneNumber" minOccurs="0"/>
+			<xs:element name="faxNumber" type="PhoneNumber" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="Company">
+		<xs:annotation>
+			<xs:documentation>data type representing a company</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="logo" type="xs:base64Binary" minOccurs="0"/>
+			<xs:element name="address" type="PostalAddress" minOccurs="0"/>
+			<xs:element name="phone" type="PhoneNumber"/>
+			<xs:element name="fax" type="PhoneNumber" minOccurs="0"/>
+			<xs:element name="url" type="xs:anyURI"/>
+			<xs:element name="parentCompany" type="xs:IDREF" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="Transactor">
+		<xs:annotation>
+			<xs:documentation>data type for representing a party in a transaction including company and contacts</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="company" type="Company"/>
+			<xs:element name="mainContact" type="Person"/>
+			<xs:element name="billingContact" type="Person"/>
+			<xs:element name="otherContacts" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="contact" type="Person"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EmailAddress">
+		<xs:annotation>
+			<xs:documentation>This is the data type for email addresses. The pattern is a regular expression that validates the email address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PhoneNumber">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:complexType name="PostalAddress">
+		<xs:annotation>
+			<xs:documentation>data type for expressing a postal address</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="streetAddress">
+				<xs:complexType>
+					<xs:sequence maxOccurs="unbounded">
+						<xs:element name="streetLine"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="city"/>
+			<xs:element name="state"/>
+			<xs:element name="country"/>
+			<xs:element name="postalCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Money">
+		<xs:annotation>
+			<xs:documentation>data type for expressing money</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:simpleType name="CurrencyCode">
+		<xs:annotation>
+			<xs:documentation>ISO 4217 Currency Code</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:enumeration value="USD">
+				<xs:annotation>
+					<xs:documentation>US Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Rate">
+		<xs:annotation>
+			<xs:documentation>data type for expressing rates</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="amount" type="Money"/>
+			<xs:element name="costMethod" type="CostMethod"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CostMethod">
+		<xs:annotation>
+			<xs:documentation>data type representing costing methods e.g. CPM, CPA, CPC, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CPM"/>
+			<xs:enumeration value="CPC"/>
+			<xs:enumeration value="CPA"/>
+			<xs:enumeration value="Sponsorship"/>
+			<xs:enumeration value="RevenueShare"/>
+			<xs:enumeration value="CostPlusCPC"/>
+			<xs:enumeration value="CostPlusCPA"/>
+			<xs:enumeration value="CostPlusRevenueShare"/>
+			<xs:enumeration value="PercentOfPayout"/>
+			<xs:enumeration value="FlatFee"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TimeSpan">
+		<xs:annotation>
+			<xs:documentation>data type for a time span range from start DateTime to end DateTime</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="start" type="xs:dateTime"/>
+			<xs:element name="end" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="System">
+		<xs:annotation>
+			<xs:documentation>data type that represents a computer system</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name"/>
+			<xs:element name="vendor" type="Company"/>
+			<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
