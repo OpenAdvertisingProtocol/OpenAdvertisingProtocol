@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:include schemaLocation="currencyCode.xsd"/>
 	<xs:complexType name="Person">
 		<xs:annotation>
 			<xs:documentation>data type representing a person</xs:documentation>
@@ -89,20 +90,12 @@
 		<xs:annotation>
 			<xs:documentation>data type for expressing money</xs:documentation>
 		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:decimal">
+				<xs:attribute name="currencyCode" type="CurrencyCode" default="USD"/>
+			</xs:extension>
+		</xs:simpleContent>
 	</xs:complexType>
-	<xs:simpleType name="CurrencyCode">
-		<xs:annotation>
-			<xs:documentation>ISO 4217 Currency Code</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:length value="3"/>
-			<xs:enumeration value="USD">
-				<xs:annotation>
-					<xs:documentation>US Dollar</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:complexType name="Rate">
 		<xs:annotation>
 			<xs:documentation>data type for expressing rates</xs:documentation>
@@ -148,4 +141,38 @@
 			<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="Dimension">
+		<xs:annotation>
+			<xs:documentation>data type representing length and width</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="width">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:decimal">
+							<xs:attribute name="unitOfLength" type="UnitOfLength" default="pixels"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="height">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:decimal">
+							<xs:attribute name="unitOfLength" type="UnitOfLength" default="pixels"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="UnitOfLength">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="pixels"/>
+			<xs:enumeration value="inches"/>
+			<xs:enumeration value="centimeters"/>
+			<xs:enumeration value="millimeters"/>
+			<xs:enumeration value="feet"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>

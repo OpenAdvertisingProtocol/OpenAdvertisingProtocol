@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
-	<xs:include schemaLocation="file:///C:/Users/jpych/Documents/GitHub/OpenAdvertisingProtocol/model/schemas/common.xsd"/>
-	<xs:include schemaLocation="file:///C:/Users/jpych/Documents/GitHub/OpenAdvertisingProtocol/model/schemas/program.xsd"/>
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:include schemaLocation="program.xsd"/>
 	<xs:element name="order" type="Order">
 		<xs:annotation>
 			<xs:documentation>This is an insertion order element</xs:documentation>
@@ -16,18 +16,30 @@
 			<xs:element name="buyer" type="Transactor"/>
 			<xs:element name="seller" type="Transactor"/>
 			<xs:element name="advertiser" type="Transactor"/>
-			<xs:element name="flightDates" type="TimeSpan"/>
+			<xs:element name="flightDates" type="TimeSpan">
+				<xs:annotation>
+					<xs:documentation>The earliest start date and the latest end date for all line items in this order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="lineItems">
 				<xs:complexType>
-					<xs:sequence maxOccurs="unbounded">
+					<xs:sequence>
 						<xs:choice>
 							<xs:element name="package"/>
 							<xs:element name="lineItem">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="name"/>
-										<xs:element name="buyerId"/>
-										<xs:element name="sellerId"/>
+										<xs:element name="buyerId" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>The buyer's identifier for this line item.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="sellerId" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>The seller's identifier for this line item</xs:documentation>
+											</xs:annotation>
+										</xs:element>
 										<xs:element name="program">
 											<xs:complexType>
 												<xs:sequence>
@@ -38,7 +50,11 @@
 										</xs:element>
 										<xs:element name="placement" type="Placement"/>
 										<xs:element name="targeting"/>
-										<xs:element name="flightDates" type="TimeSpan"/>
+										<xs:element name="flightDates" type="TimeSpan">
+											<xs:annotation>
+												<xs:documentation>The earliest start date and latest end date for this line item.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
 										<xs:element name="quantity"/>
 										<xs:element name="rate"/>
 										<xs:element name="amount"/>

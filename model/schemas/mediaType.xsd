@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (Bionic Advertising Systems) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:simpleType name="MediaType">
+		<xs:annotation>
+			<xs:documentation>IANA-standard Internet Media Types</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="image/gif">
+				<xs:annotation>
+					<xs:documentation> GIF image; Defined in RFC 2045 and RFC 2046</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="image/jpeg">
+				<xs:annotation>
+					<xs:documentation> JPEG JFIF image; Defined in RFC 2045 and RFC 2046</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="image/pjpeg">
+				<xs:annotation>
+					<xs:documentation> JPEG JFIF image; Associated with Internet Explorer; Listed in ms775147(v=vs.85) - Progressive JPEG, initiated before global browser support for progressive JPEGs (Microsoft and Firefox).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="image/png">
+				<xs:annotation>
+					<xs:documentation> Portable Network Graphics; Registered,[10] Defined in RFC 2083</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="image/svg+xml">
+				<xs:annotation>
+					<xs:documentation> SVG vector image; Defined in SVG Tiny 1.2 Specification Appendix M</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="image/tiff">
+				<xs:annotation>
+					<xs:documentation> Tag Image File Format (only for Baseline TIFF); Defined in RFC 3302</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audio/basic">
+				<xs:annotation>
+					<xs:documentation> μ-law audio at 8 kHz, 1 channel; Defined in RFC 2046</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audio/L24">
+				<xs:annotation>
+					<xs:documentation> 24bit Linear PCM audio at 8–48 kHz, 1-N channels; Defined in RFC 3190</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audio/mp4">
+				<xs:annotation>
+					<xs:documentation> MP4 audio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audio/mpeg">
+				<xs:annotation>
+					<xs:documentation> MP3 or other MPEG audio; Defined in RFC 3003</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audio/ogg">
+				<xs:annotation>
+					<xs:documentation> Ogg Vorbis, Speex, Flac and other audio; Defined in RFC 5334</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audio/vorbis">
+				<xs:annotation>
+					<xs:documentation> Vorbis encoded audio; Defined in RFC 5215</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audio/vnd.rn-realaudio">
+				<xs:annotation>
+					<xs:documentation> RealAudio; Documented in RealPlayer Help[9]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audio/vnd.wave">
+				<xs:annotation>
+					<xs:documentation> WAV audio; Defined in RFC 2361</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audio/webm">
+				<xs:annotation>
+					<xs:documentation> WebM open media format</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="video/mpeg">
+				<xs:annotation>
+					<xs:documentation> MPEG-1 video with multiplexed audio; Defined in RFC 2045 and RFC 2046</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="video/mp4">
+				<xs:annotation>
+					<xs:documentation> MP4 video; Defined in RFC 4337</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="video/ogg">
+				<xs:annotation>
+					<xs:documentation> Ogg Theora or other video (with audio); Defined in RFC 5334</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="video/quicktime">
+				<xs:annotation>
+					<xs:documentation> QuickTime video; Registered[11]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="video/webm">
+				<xs:annotation>
+					<xs:documentation> WebM Matroska-based open media format</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="video/x-matroska">
+				<xs:annotation>
+					<xs:documentation> Matroska open media format</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="video/x-ms-wmv">
+				<xs:annotation>
+					<xs:documentation> Windows Media Video; Documented in Microsoft KB 288102</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="video/x-flv">
+				<xs:annotation>
+					<xs:documentation> Flash video (FLV files)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/atom+xml">
+				<xs:annotation>
+					<xs:documentation> Atom feeds</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/ecmascript">
+				<xs:annotation>
+					<xs:documentation> ECMAScript/JavaScript; Defined in RFC 4329 (equivalent to application/javascript but with stricter processing rules)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/EDI-X12">
+				<xs:annotation>
+					<xs:documentation> EDI X12 data; Defined in RFC 1767</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/EDIFACT">
+				<xs:annotation>
+					<xs:documentation> EDI EDIFACT data; Defined in RFC 1767</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/json">
+				<xs:annotation>
+					<xs:documentation> JavaScript Object Notation JSON; Defined in RFC 4627</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/javascript">
+				<xs:annotation>
+					<xs:documentation> ECMAScript/JavaScript; Defined in RFC 4329 (equivalent to application/ecmascript but with looser processing rules) It is not accepted in IE 8 or earlier - text/javascript is accepted but it is defined as obsolete in RFC 4329. The "type" attribute of the script tag in HTML5 is optional. In practice, omitting the media type of JavaScript programs is the most interoperable solution, since all browsers have always assumed the correct default even before HTML5.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/octet-stream">
+				<xs:annotation>
+					<xs:documentation> Arbitrary binary data.[6] Generally speaking this type identifies files that are not associated with a specific application. Contrary to past assumptions by software packages such as Apache this is not a type that should be applied to unknown files. In such a case, a server or application should not indicate a content type, as it may be incorrect, but rather, should omit the type in order to allow the recipient to guess the type.[7]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/ogg">
+				<xs:annotation>
+					<xs:documentation> Ogg, a multimedia bitstream container format; Defined in RFC 5334</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/pdf">
+				<xs:annotation>
+					<xs:documentation> Portable Document Format, PDF has been in use for document exchange on the Internet since 1993; Defined in RFC 3778</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/postscript">
+				<xs:annotation>
+					<xs:documentation> PostScript; Defined in RFC 2046</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/rdf+xml">
+				<xs:annotation>
+					<xs:documentation> Resource Description Framework; Defined by RFC 3870</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/rss+xml">
+				<xs:annotation>
+					<xs:documentation> RSS feeds</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/soap+xml">
+				<xs:annotation>
+					<xs:documentation> SOAP; Defined by RFC 3902</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/font-woff">
+				<xs:annotation>
+					<xs:documentation> Web Open Font Format; (candidate recommendation; use application/x-font-woff until standard is official)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/xhtml+xml">
+				<xs:annotation>
+					<xs:documentation> XHTML; Defined by RFC 3236</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/xml">
+				<xs:annotation>
+					<xs:documentation> XML files; Defined by RFC 3023</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/xml-dtd">
+				<xs:annotation>
+					<xs:documentation> DTD files; Defined by RFC 3023</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/xop+xml">
+				<xs:annotation>
+					<xs:documentation> XOP</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/zip">
+				<xs:annotation>
+					<xs:documentation> ZIP archive files; Registered[8]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/gzip">
+				<xs:annotation>
+					<xs:documentation> Gzip, Defined in RFC 6713</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="message/http">
+				<xs:annotation>
+					<xs:documentation> Defined in RFC 2616</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="message/imdn+xml">
+				<xs:annotation>
+					<xs:documentation> IMDN Instant Message Disposition Notification; Defined in RFC 5438</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="message/partial">
+				<xs:annotation>
+					<xs:documentation> Email; Defined in RFC 2045 and RFC 2046</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="message/rfc822">
+				<xs:annotation>
+					<xs:documentation> Email; EML files, MIME files, MHT files, MHTML files; Defined in RFC 2045 and RFC 2046</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="model/iges">
+				<xs:annotation>
+					<xs:documentation> IGS files, IGES files; Defined in RFC 2077</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="model/mesh">
+				<xs:annotation>
+					<xs:documentation> MSH files, MESH files; Defined in RFC 2077, SILO files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="model/vrml">
+				<xs:annotation>
+					<xs:documentation> WRL files, VRML files; Defined in RFC 2077</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="model/x3d+binary">
+				<xs:annotation>
+					<xs:documentation> X3D ISO standard for representing 3D computer graphics, X3DB binary files - never Internet Assigned Numbers Authority approved</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="model/x3d+fastinfoset">
+				<xs:annotation>
+					<xs:documentation> X3D ISO standard for representing 3D computer graphics, X3DB binary files (application in process, this replaces any use of model/x3d+binary)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="model/x3d-vrml">
+				<xs:annotation>
+					<xs:documentation> X3D ISO standard for representing 3D computer graphics, X3DV VRML files (application in process, previous uses may have been model/x3d+vrml)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="model/x3d+xml">
+				<xs:annotation>
+					<xs:documentation> X3D ISO standard for representing 3D computer graphics, X3D XML files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="multipart/mixed">
+				<xs:annotation>
+					<xs:documentation> MIME Email; Defined in RFC 2045 and RFC 2046</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="multipart/alternative">
+				<xs:annotation>
+					<xs:documentation> MIME Email; Defined in RFC 2045 and RFC 2046</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="multipart/related">
+				<xs:annotation>
+					<xs:documentation> MIME Email; Defined in RFC 2387 and used by MHTML (HTML mail)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="multipart/form-data">
+				<xs:annotation>
+					<xs:documentation> MIME Webform; Defined in RFC 2388</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="multipart/signed">
+				<xs:annotation>
+					<xs:documentation> Defined in RFC 1847</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="multipart/encrypted">
+				<xs:annotation>
+					<xs:documentation> Defined in RFC 1847</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="text/cmd">
+				<xs:annotation>
+					<xs:documentation> commands; subtype resident in Gecko browsers like Firefox 3.5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="text/css">
+				<xs:annotation>
+					<xs:documentation> Cascading Style Sheets; Defined in RFC 2318</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="text/csv">
+				<xs:annotation>
+					<xs:documentation> Comma-separated values; Defined in RFC 4180</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="text/html">
+				<xs:annotation>
+					<xs:documentation> HTML; Defined in RFC 2854</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="text/javascript (Obsolete)">
+				<xs:annotation>
+					<xs:documentation> JavaScript; Defined in and made obsolete in RFC 4329 in order to discourage its usage in favor of application/javascript. However, text/javascript is allowed in HTML 4 and 5 and, unlike application/javascript, has cross-browser support. The "type" attribute of the script tag in HTML5 is optional and there is no need to use it at all since all browsers have always assumed the correct default (even in HTML 4 where it was required by the specification).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="text/plain">
+				<xs:annotation>
+					<xs:documentation> Textual data; Defined in RFC 2046 and RFC 3676</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="text/vcard">
+				<xs:annotation>
+					<xs:documentation> vCard (contact information); Defined in RFC 6350</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="text/xml">
+				<xs:annotation>
+					<xs:documentation> Extensible Markup Language; Defined in RFC 3023</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.oasis.opendocument.text">
+				<xs:annotation>
+					<xs:documentation> OpenDocument Text; Registered[12]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.oasis.opendocument.spreadsheet">
+				<xs:annotation>
+					<xs:documentation> OpenDocument Spreadsheet; Registered[13]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.oasis.opendocument.presentation">
+				<xs:annotation>
+					<xs:documentation> OpenDocument Presentation; Registered[14]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.oasis.opendocument.graphics">
+				<xs:annotation>
+					<xs:documentation> OpenDocument Graphics; Registered[15]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.ms-excel">
+				<xs:annotation>
+					<xs:documentation> Microsoft Excel files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+				<xs:annotation>
+					<xs:documentation> Microsoft Excel 2007 files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.ms-powerpoint">
+				<xs:annotation>
+					<xs:documentation> Microsoft Powerpoint files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.openxmlformats-officedocument.presentationml.presentation">
+				<xs:annotation>
+					<xs:documentation> Microsoft Powerpoint 2007 files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+				<xs:annotation>
+					<xs:documentation> Microsoft Word 2007 files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.mozilla.xul+xml">
+				<xs:annotation>
+					<xs:documentation> Mozilla XUL files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.google-earth.kml+xml">
+				<xs:annotation>
+					<xs:documentation> KML files (e.g. for Google Earth)[16]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.google-earth.kmz">
+				<xs:annotation>
+					<xs:documentation> KMZ files (e.g. for Google Earth)[17]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.dart">
+				<xs:annotation>
+					<xs:documentation> Dart files [18]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.android.package-archive">
+				<xs:annotation>
+					<xs:documentation> For download apk files.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/vnd.ms-xpsdocument">
+				<xs:annotation>
+					<xs:documentation> XPS document[19]</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-7z-compressed">
+				<xs:annotation>
+					<xs:documentation> 7-Zip compression format.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-deb">
+				<xs:annotation>
+					<xs:documentation> deb (file format), a software package format used by the Debian project</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-dvi">
+				<xs:annotation>
+					<xs:documentation> device-independent document in DVI format</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-font-ttf">
+				<xs:annotation>
+					<xs:documentation> TrueType Font No registered MIME type, but this is the most commonly used</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-javascript">
+				<xs:annotation>
+					<xs:documentation/>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-latex">
+				<xs:annotation>
+					<xs:documentation> LaTeX files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-mpegURL">
+				<xs:annotation>
+					<xs:documentation> .m3u8 variant playlist</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-rar-compressed">
+				<xs:annotation>
+					<xs:documentation> RAR archive files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-shockwave-flash">
+				<xs:annotation>
+					<xs:documentation> Adobe Flash files for example with the extension .swf</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-stuffit">
+				<xs:annotation>
+					<xs:documentation> StuffIt archive files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-tar">
+				<xs:annotation>
+					<xs:documentation> Tarball files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-www-form-urlencoded">
+				<xs:annotation>
+					<xs:documentation>Form Encoded Data; Documented in HTML 4.01 Specification, Section 17.13.4.1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-xpinstall">
+				<xs:annotation>
+					<xs:documentation> Add-ons to Mozilla applications (Firefox, Thunderbird, SeaMonkey, and the discontinued Sunbird)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audio/x-aac">
+				<xs:annotation>
+					<xs:documentation> .aac audio files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audio/x-caf">
+				<xs:annotation>
+					<xs:documentation> Apple's CAF audio files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="image/x-xcf">
+				<xs:annotation>
+					<xs:documentation> GIMP image file</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="text/x-gwt-rpc">
+				<xs:annotation>
+					<xs:documentation> GoogleWebToolkit data</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="text/x-jquery-tmpl">
+				<xs:annotation>
+					<xs:documentation> jQuery template data</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="text/x-markdown">
+				<xs:annotation>
+					<xs:documentation> Markdown formatted text</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="application/x-pkcs12">
+				<xs:annotation>
+					<xs:documentation> a variant of PKCS standard files</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

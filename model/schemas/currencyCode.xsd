@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (Bionic Advertising Systems) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:simpleType name="CurrencyCode">
+		<xs:annotation>
+			<xs:documentation>ISO 4217 Currency Code.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:enumeration value="AED">
+				<xs:annotation>
+					<xs:documentation>United Arab Emirates Dirham</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AFN">
+				<xs:annotation>
+					<xs:documentation>Afghanistan Afghani</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALL">
+				<xs:annotation>
+					<xs:documentation>Albania Lek</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AMD">
+				<xs:annotation>
+					<xs:documentation>Armenia Dram</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ANG">
+				<xs:annotation>
+					<xs:documentation>Netherlands Antilles Guilder</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AOA">
+				<xs:annotation>
+					<xs:documentation>Angola Kwanza</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARS">
+				<xs:annotation>
+					<xs:documentation>Argentina Peso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUD">
+				<xs:annotation>
+					<xs:documentation>Australia Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AWG">
+				<xs:annotation>
+					<xs:documentation>Aruba Guilder</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AZN">
+				<xs:annotation>
+					<xs:documentation>Azerbaijan New Manat</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAM">
+				<xs:annotation>
+					<xs:documentation>Bosnia and Herzegovina Convertible Marka</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BBD">
+				<xs:annotation>
+					<xs:documentation>Barbados Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BDT">
+				<xs:annotation>
+					<xs:documentation>Bangladesh Taka</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BGN">
+				<xs:annotation>
+					<xs:documentation>Bulgaria Lev</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BHD">
+				<xs:annotation>
+					<xs:documentation>Bahrain Dinar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BIF">
+				<xs:annotation>
+					<xs:documentation>Burundi Franc</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BMD">
+				<xs:annotation>
+					<xs:documentation>Bermuda Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BND">
+				<xs:annotation>
+					<xs:documentation>Brunei Darussalam Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BOB">
+				<xs:annotation>
+					<xs:documentation>Bolivia Boliviano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRL">
+				<xs:annotation>
+					<xs:documentation>Brazil Real</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BSD">
+				<xs:annotation>
+					<xs:documentation>Bahamas Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BTN">
+				<xs:annotation>
+					<xs:documentation>Bhutan Ngultrum</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BWP">
+				<xs:annotation>
+					<xs:documentation>Botswana Pula</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BYR">
+				<xs:annotation>
+					<xs:documentation>Belarus Ruble</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BZD">
+				<xs:annotation>
+					<xs:documentation>Belize Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAD">
+				<xs:annotation>
+					<xs:documentation>Canada Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CDF">
+				<xs:annotation>
+					<xs:documentation>Congo/Kinshasa Franc</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHF">
+				<xs:annotation>
+					<xs:documentation>Switzerland Franc</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CLP">
+				<xs:annotation>
+					<xs:documentation>Chile Peso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CNY">
+				<xs:annotation>
+					<xs:documentation>China Yuan Renminbi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COP">
+				<xs:annotation>
+					<xs:documentation>Colombia Peso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRC">
+				<xs:annotation>
+					<xs:documentation>Costa Rica Colon</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CUC">
+				<xs:annotation>
+					<xs:documentation>Cuba Convertible Peso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CUP">
+				<xs:annotation>
+					<xs:documentation>Cuba Peso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CVE">
+				<xs:annotation>
+					<xs:documentation>Cape Verde Escudo</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CZK">
+				<xs:annotation>
+					<xs:documentation>Czech Republic Koruna</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DJF">
+				<xs:annotation>
+					<xs:documentation>Djibouti Franc</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DKK">
+				<xs:annotation>
+					<xs:documentation>Denmark Krone</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOP">
+				<xs:annotation>
+					<xs:documentation>Dominican Republic Peso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DZD">
+				<xs:annotation>
+					<xs:documentation>Algeria Dinar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGP">
+				<xs:annotation>
+					<xs:documentation>Egypt Pound</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERN">
+				<xs:annotation>
+					<xs:documentation>Eritrea Nakfa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ETB">
+				<xs:annotation>
+					<xs:documentation>Ethiopia Birr</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EUR">
+				<xs:annotation>
+					<xs:documentation>Euro Member Countries</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FJD">
+				<xs:annotation>
+					<xs:documentation>Fiji Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FKP">
+				<xs:annotation>
+					<xs:documentation>Falkland Islands (Malvinas) Pound</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GBP">
+				<xs:annotation>
+					<xs:documentation>United Kingdom Pound</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GEL">
+				<xs:annotation>
+					<xs:documentation>Georgia Lari</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GGP">
+				<xs:annotation>
+					<xs:documentation>Guernsey Pound</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GHS">
+				<xs:annotation>
+					<xs:documentation>Ghana Cedi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GIP">
+				<xs:annotation>
+					<xs:documentation>Gibraltar Pound</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GMD">
+				<xs:annotation>
+					<xs:documentation>Gambia Dalasi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GNF">
+				<xs:annotation>
+					<xs:documentation>Guinea Franc</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GTQ">
+				<xs:annotation>
+					<xs:documentation>Guatemala Quetzal</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GYD">
+				<xs:annotation>
+					<xs:documentation>Guyana Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HKD">
+				<xs:annotation>
+					<xs:documentation>Hong Kong Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HNL">
+				<xs:annotation>
+					<xs:documentation>Honduras Lempira</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HRK">
+				<xs:annotation>
+					<xs:documentation>Croatia Kuna</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HTG">
+				<xs:annotation>
+					<xs:documentation>Haiti Gourde</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HUF">
+				<xs:annotation>
+					<xs:documentation>Hungary Forint</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IDR">
+				<xs:annotation>
+					<xs:documentation>Indonesia Rupiah</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ILS">
+				<xs:annotation>
+					<xs:documentation>Israel Shekel</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IMP">
+				<xs:annotation>
+					<xs:documentation>Isle of Man Pound</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INR">
+				<xs:annotation>
+					<xs:documentation>India Rupee</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IQD">
+				<xs:annotation>
+					<xs:documentation>Iraq Dinar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRR">
+				<xs:annotation>
+					<xs:documentation>Iran Rial</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISK">
+				<xs:annotation>
+					<xs:documentation>Iceland Krona</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JEP">
+				<xs:annotation>
+					<xs:documentation>Jersey Pound</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JMD">
+				<xs:annotation>
+					<xs:documentation>Jamaica Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JOD">
+				<xs:annotation>
+					<xs:documentation>Jordan Dinar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JPY">
+				<xs:annotation>
+					<xs:documentation>Japan Yen</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KES">
+				<xs:annotation>
+					<xs:documentation>Kenya Shilling</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KGS">
+				<xs:annotation>
+					<xs:documentation>Kyrgyzstan Som</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KHR">
+				<xs:annotation>
+					<xs:documentation>Cambodia Riel</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KMF">
+				<xs:annotation>
+					<xs:documentation>Comoros Franc</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KPW">
+				<xs:annotation>
+					<xs:documentation>Korea (North) Won</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KRW">
+				<xs:annotation>
+					<xs:documentation>Korea (South) Won</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KWD">
+				<xs:annotation>
+					<xs:documentation>Kuwait Dinar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KYD">
+				<xs:annotation>
+					<xs:documentation>Cayman Islands Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KZT">
+				<xs:annotation>
+					<xs:documentation>Kazakhstan Tenge</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAK">
+				<xs:annotation>
+					<xs:documentation>Laos Kip</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LBP">
+				<xs:annotation>
+					<xs:documentation>Lebanon Pound</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LKR">
+				<xs:annotation>
+					<xs:documentation>Sri Lanka Rupee</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LRD">
+				<xs:annotation>
+					<xs:documentation>Liberia Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LSL">
+				<xs:annotation>
+					<xs:documentation>Lesotho Loti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LTL">
+				<xs:annotation>
+					<xs:documentation>Lithuania Litas</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LVL">
+				<xs:annotation>
+					<xs:documentation>Latvia Lat</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LYD">
+				<xs:annotation>
+					<xs:documentation>Libya Dinar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAD">
+				<xs:annotation>
+					<xs:documentation>Morocco Dirham</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MDL">
+				<xs:annotation>
+					<xs:documentation>Moldova Leu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MGA">
+				<xs:annotation>
+					<xs:documentation>Madagascar Ariary</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MKD">
+				<xs:annotation>
+					<xs:documentation>Macedonia Denar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MMK">
+				<xs:annotation>
+					<xs:documentation>Myanmar (Burma) Kyat</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNT">
+				<xs:annotation>
+					<xs:documentation>Mongolia Tughrik</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOP">
+				<xs:annotation>
+					<xs:documentation>Macau Pataca</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MRO">
+				<xs:annotation>
+					<xs:documentation>Mauritania Ouguiya</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MUR">
+				<xs:annotation>
+					<xs:documentation>Mauritius Rupee</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MVR">
+				<xs:annotation>
+					<xs:documentation>Maldives (Maldive Islands) Rufiyaa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MWK">
+				<xs:annotation>
+					<xs:documentation>Malawi Kwacha</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MXN">
+				<xs:annotation>
+					<xs:documentation>Mexico Peso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MYR">
+				<xs:annotation>
+					<xs:documentation>Malaysia Ringgit</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MZN">
+				<xs:annotation>
+					<xs:documentation>Mozambique Metical</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NAD">
+				<xs:annotation>
+					<xs:documentation>Namibia Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NGN">
+				<xs:annotation>
+					<xs:documentation>Nigeria Naira</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NIO">
+				<xs:annotation>
+					<xs:documentation>Nicaragua Cordoba</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NOK">
+				<xs:annotation>
+					<xs:documentation>Norway Krone</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NPR">
+				<xs:annotation>
+					<xs:documentation>Nepal Rupee</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NZD">
+				<xs:annotation>
+					<xs:documentation>New Zealand Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OMR">
+				<xs:annotation>
+					<xs:documentation>Oman Rial</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAB">
+				<xs:annotation>
+					<xs:documentation>Panama Balboa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PEN">
+				<xs:annotation>
+					<xs:documentation>Peru Nuevo Sol</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PGK">
+				<xs:annotation>
+					<xs:documentation>Papua New Guinea Kina</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PHP">
+				<xs:annotation>
+					<xs:documentation>Philippines Peso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PKR">
+				<xs:annotation>
+					<xs:documentation>Pakistan Rupee</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PLN">
+				<xs:annotation>
+					<xs:documentation>Poland Zloty</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PYG">
+				<xs:annotation>
+					<xs:documentation>Paraguay Guarani</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QAR">
+				<xs:annotation>
+					<xs:documentation>Qatar Riyal</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RON">
+				<xs:annotation>
+					<xs:documentation>Romania New Leu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RSD">
+				<xs:annotation>
+					<xs:documentation>Serbia Dinar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUB">
+				<xs:annotation>
+					<xs:documentation>Russia Ruble</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RWF">
+				<xs:annotation>
+					<xs:documentation>Rwanda Franc</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAR">
+				<xs:annotation>
+					<xs:documentation>Saudi Arabia Riyal</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SBD">
+				<xs:annotation>
+					<xs:documentation>Solomon Islands Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SCR">
+				<xs:annotation>
+					<xs:documentation>Seychelles Rupee</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SDG">
+				<xs:annotation>
+					<xs:documentation>Sudan Pound</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SEK">
+				<xs:annotation>
+					<xs:documentation>Sweden Krona</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SGD">
+				<xs:annotation>
+					<xs:documentation>Singapore Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SHP">
+				<xs:annotation>
+					<xs:documentation>Saint Helena Pound</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLL">
+				<xs:annotation>
+					<xs:documentation>Sierra Leone Leone</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOS">
+				<xs:annotation>
+					<xs:documentation>Somalia Shilling</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPL*">
+				<xs:annotation>
+					<xs:documentation>Seborga Luigino</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SRD">
+				<xs:annotation>
+					<xs:documentation>Suriname Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STD">
+				<xs:annotation>
+					<xs:documentation>São Tomé and Príncipe Dobra</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SVC">
+				<xs:annotation>
+					<xs:documentation>El Salvador Colon</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SYP">
+				<xs:annotation>
+					<xs:documentation>Syria Pound</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SZL">
+				<xs:annotation>
+					<xs:documentation>Swaziland Lilangeni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="THB">
+				<xs:annotation>
+					<xs:documentation>Thailand Baht</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TJS">
+				<xs:annotation>
+					<xs:documentation>Tajikistan Somoni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TMT">
+				<xs:annotation>
+					<xs:documentation>Turkmenistan Manat</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TND">
+				<xs:annotation>
+					<xs:documentation>Tunisia Dinar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TOP">
+				<xs:annotation>
+					<xs:documentation>Tonga Pa'anga</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TRY">
+				<xs:annotation>
+					<xs:documentation>Turkey Lira</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TTD">
+				<xs:annotation>
+					<xs:documentation>Trinidad and Tobago Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TVD">
+				<xs:annotation>
+					<xs:documentation>Tuvalu Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TWD">
+				<xs:annotation>
+					<xs:documentation>Taiwan New Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TZS">
+				<xs:annotation>
+					<xs:documentation>Tanzania Shilling</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UAH">
+				<xs:annotation>
+					<xs:documentation>Ukraine Hryvna</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UGX">
+				<xs:annotation>
+					<xs:documentation>Uganda Shilling</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USD">
+				<xs:annotation>
+					<xs:documentation>United States Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UYU">
+				<xs:annotation>
+					<xs:documentation>Uruguay Peso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UZS">
+				<xs:annotation>
+					<xs:documentation>Uzbekistan Som</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VEF">
+				<xs:annotation>
+					<xs:documentation>Venezuela Bolivar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VND">
+				<xs:annotation>
+					<xs:documentation>Viet Nam Dong</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VUV">
+				<xs:annotation>
+					<xs:documentation>Vanuatu Vatu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WST">
+				<xs:annotation>
+					<xs:documentation>Samoa Tala</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XAF">
+				<xs:annotation>
+					<xs:documentation>Communauté Financière Africaine (BEAC) CFA Franc BEAC</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XCD">
+				<xs:annotation>
+					<xs:documentation>East Caribbean Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XDR">
+				<xs:annotation>
+					<xs:documentation>International Monetary Fund (IMF) Special Drawing Rights</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XOF">
+				<xs:annotation>
+					<xs:documentation>Communauté Financière Africaine (BCEAO) Franc</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XPF">
+				<xs:annotation>
+					<xs:documentation>Comptoirs Français du Pacifique (CFP) Franc</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YER">
+				<xs:annotation>
+					<xs:documentation>Yemen Rial</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZAR">
+				<xs:annotation>
+					<xs:documentation>South Africa Rand</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZMW">
+				<xs:annotation>
+					<xs:documentation>Zambia Kwacha</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZWD">
+				<xs:annotation>
+					<xs:documentation>Zimbabwe Dollar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
