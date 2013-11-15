@@ -40,7 +40,7 @@ December 2014 and to complete initial reference implementations in February 2014
 Beyond that, we plan to complete the invoice and other parts of the protocol in stages.
 
 
-Participating Companies
+Participating Organizations
 ----------------------
 
 * [Adslot](http://www.adslot.com/)
