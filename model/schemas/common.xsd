@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
+<!-- edited with XMLSpy v2014 (http://www.altova.com) by Joe Pych (Bionic Advertising Services) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:include schemaLocation="currencyCode.xsd"/>
+	<xs:include schemaLocation="mediaType.xsd"/>
 	<xs:complexType name="Person">
 		<xs:annotation>
 			<xs:documentation>data type representing a person</xs:documentation>
@@ -9,6 +10,7 @@
 		<xs:sequence>
 			<xs:element name="firstName"/>
 			<xs:element name="lastName"/>
+			<xs:element name="photo" type="File" minOccurs="0"/>
 			<xs:element name="jobTitle" minOccurs="0"/>
 			<xs:element name="company">
 				<xs:complexType>
@@ -31,7 +33,7 @@
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name" type="xs:string"/>
-			<xs:element name="logo" type="xs:base64Binary" minOccurs="0"/>
+			<xs:element name="logo" type="File" minOccurs="0"/>
 			<xs:element name="address" type="PostalAddress" minOccurs="0"/>
 			<xs:element name="phone" type="PhoneNumber"/>
 			<xs:element name="fax" type="PhoneNumber" minOccurs="0"/>
@@ -120,6 +122,8 @@
 			<xs:enumeration value="CostPlusRevenueShare"/>
 			<xs:enumeration value="PercentOfPayout"/>
 			<xs:enumeration value="FlatFee"/>
+			<xs:enumeration value="Makegood"/>
+			<xs:enumeration value="ValueAdd"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="TimeSpan">
@@ -175,4 +179,65 @@
 			<xs:enumeration value="feet"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="AdTag">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="tagType" type="TagType"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="TagType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Standard">
+				<xs:annotation>
+					<xs:documentation>Only able to serve static images (no flash)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Iframe/Javascript">
+				<xs:annotation>
+					<xs:documentation>The most commonly used tag type. It can serve both static and flash creative units.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Internal Redirect">
+				<xs:annotation>
+					<xs:documentation>Only used to serve DFA ads on sites that also use the Doubleclick for Publishers platform. These tags are considered the most efficient to traffic and typically result in very few discrepancies.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JavaScript/Standard">
+				<xs:annotation>
+					<xs:documentation>Can deliver both static and rich media creative units. Useful for complex sites and/or sites that do not wish to use iFrames</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Click Tracker">
+				<xs:annotation>
+					<xs:documentation>Used only to record clicks. Used on text links, links in emails or other elements on a website.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="File">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The name of the file</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:annotation>
+					<xs:documentation>Either a link to the file or the file itself.</xs:documentation>
+				</xs:annotation>
+				<xs:element name="url" type="xs:anyURI">
+					<xs:annotation>
+						<xs:documentation>Link to the file.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="binary" type="xs:base64Binary">
+					<xs:annotation>
+						<xs:documentation>The binary file itself</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="mediaType" type="MediaType"/>
+	</xs:complexType>
 </xs:schema>

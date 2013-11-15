@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
+<!-- edited with XMLSpy v2014 (http://www.altova.com) by Joe Pych (Bionic Advertising Services) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:include schemaLocation="common.xsd"/>
 	<xs:include schemaLocation="program.xsd"/>
@@ -60,6 +60,17 @@
 										<xs:element name="amount"/>
 										<xs:element name="isGuaranteed" type="xs:boolean"/>
 										<xs:element name="notes"/>
+										<xs:element name="creative" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>creative tags or assets can optionally be included in the order.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="tag" type="AdTag" minOccurs="0" maxOccurs="unbounded"/>
+													<xs:element name="file" type="File" minOccurs="0" maxOccurs="unbounded"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
@@ -67,9 +78,10 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="notes"/>
-			<xs:element name="terms"/>
 			<xs:element name="amount" type="Money"/>
+			<xs:element name="notes"/>
+			<xs:element name="legal"/>
+			<xs:element name="financial"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:ID"/>
 	</xs:complexType>
