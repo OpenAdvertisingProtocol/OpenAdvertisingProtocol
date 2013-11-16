@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
+<!-- edited with XMLSpy v2014 (http://www.altova.com) by Joe Pych (Bionic Advertising Services) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:include schemaLocation="common.xsd"/>
-	<xs:include schemaLocation="mediaType.xsd"/>
 	<xs:element name="program" type="Program">
 		<xs:annotation>
 			<xs:documentation>this element represents an advertising program</xs:documentation>
@@ -13,59 +12,124 @@
 			<xs:documentation>this data type represents an advertising program</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name"/>
+			<xs:element name="name" type="Name"/>
 			<xs:element name="seller" type="Transactor"/>
-			<xs:element name="description"/>
-			<xs:element name="placements">
+			<xs:element name="identifier" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="lastUpdated" type="xs:dateTime"/>
+			<xs:element name="description" type="Note" minOccurs="0"/>
+			<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+			<xs:element name="placement" type="Placement" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="channel" type="Channel" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="monthlyUniques" type="xs:long" minOccurs="0"/>
+			<xs:element name="document" type="File" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="profile" type="AudienceProfile" minOccurs="0"/>
+			<xs:element name="endorsement" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
-					<xs:sequence minOccurs="0" maxOccurs="unbounded">
-						<xs:element name="placement" type="Placement"/>
+					<xs:sequence>
+						<xs:element name="endorser" type="Person"/>
+						<xs:element name="timestamp" type="xs:dateTime"/>
+						<xs:element name="notes" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="standardTerms" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="legal" type="LegalTerms" minOccurs="0"/>
+						<xs:element name="minimumBuy" type="Money" minOccurs="0"/>
+						<xs:element name="cancellationFee" type="Money" minOccurs="0"/>
+						<xs:element name="leadTime" type="xs:short" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The number of days of lead time required for this order in advance of start date</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="orderInstructions" type="Note"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="id" type="xs:ID"/>
 	</xs:complexType>
 	<xs:complexType name="Placement">
 		<xs:annotation>
 			<xs:documentation>this data type represents a placement within an advertising program</xs:documentation>
 		</xs:annotation>
 		<xs:sequence minOccurs="1" maxOccurs="1">
-			<xs:element name="name"/>
-			<xs:element name="standardRate" type="Rate" minOccurs="0"/>
-			<xs:element name="adUnit" type="AdUnit"/>
+			<xs:element name="name" type="Name"/>
+			<xs:element name="identifier" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="description" type="Note" minOccurs="0"/>
 			<xs:element name="channel" type="Channel"/>
-		</xs:sequence>
-		<xs:attribute name="id" type="xs:ID"/>
-	</xs:complexType>
-	<xs:simpleType name="Channel">
-		<xs:annotation>
-			<xs:documentation>the type of channel</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="email"/>
-			<xs:enumeration value="onlineDisplay"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:complexType name="AdUnit">
-		<xs:sequence>
-			<xs:element name="name"/>
-			<xs:element name="isIABStandard" type="xs:boolean" minOccurs="0">
+			<xs:element name="adUnit" type="AdUnit"/>
+			<xs:element name="standardRate" type="Rate" minOccurs="0"/>
+			<xs:element name="ourRate" type="Rate" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Indicates whether or not this is an IAB Standard Ad Unit</xs:documentation>
+					<xs:documentation>negotiated rate for the user that is accessing this placement.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="initialDimensions"/>
-			<xs:element name="maxExpandedDimensions" minOccurs="0"/>
-			<xs:element name="maxInitialFileLoadSize">
-				<xs:annotation>
-					<xs:documentation>The maximum size of the creative file.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="supportedMediaTypes" minOccurs="0">
+			<xs:element name="profile" type="AudienceProfile" minOccurs="0"/>
+			<xs:element name="inventoryAvailable" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="mediaType" type="MediaType" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="period" type="TimeSpan" minOccurs="0"/>
+						<xs:element name="quantity" type="Quantity" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="targeting" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The targeting options available for this placement. TODO: define this!</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Category">
+		<xs:annotation>
+			<xs:documentation>Enumeration of IAB standard categories</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="[...iab standard categories to be entered ...]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AudienceProfile">
+		<xs:annotation>
+			<xs:documentation>data type representing an audience profile</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="malePercent" type="Percentage" minOccurs="0"/>
+			<xs:element name="femalePercent" type="Percentage" minOccurs="0"/>
+			<xs:element name="averageIncome" type="Money" minOccurs="0"/>
+			<xs:element name="dimension" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>For providing frequency distributions that give insight to the program's audience.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="name" type="Name">
+							<xs:annotation>
+								<xs:documentation>The name of the dimension. E.g. "Education"</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="value" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Each dimension can have many values.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="name" type="Name">
+										<xs:annotation>
+											<xs:documentation>The name of the value E.g. "College Graduate"</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="monthlyUniques" type="xs:double" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>The average number of monthly uniques for this value.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="percentOfVisitors" type="Percentage" minOccurs="0"/>
+									<xs:element name="quantity" type="Quantity" minOccurs="0" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>

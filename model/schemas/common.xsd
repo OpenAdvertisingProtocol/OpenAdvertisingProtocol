@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
+<!-- edited with XMLSpy v2014 (http://www.altova.com) by Joe Pych (Bionic Advertising Services) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:include schemaLocation="currencyCode.xsd"/>
 	<xs:include schemaLocation="mediaType.xsd"/>
@@ -15,32 +15,40 @@
 			<xs:element name="company">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="name"/>
-						<xs:element name="id" type="xs:IDREF"/>
+						<xs:element name="name" type="Name"/>
+						<xs:element name="id" type="Identifier" minOccurs="0"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="email" type="EmailAddress"/>
+			<xs:element name="address" type="PostalAddress" minOccurs="0"/>
 			<xs:element name="workPhone" type="PhoneNumber" minOccurs="0"/>
 			<xs:element name="mobilePhone" type="PhoneNumber" minOccurs="0"/>
 			<xs:element name="faxNumber" type="PhoneNumber" minOccurs="0"/>
+			<xs:element name="identifiers" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="id" type="xs:ID"/>
 	</xs:complexType>
 	<xs:complexType name="Company">
 		<xs:annotation>
 			<xs:documentation>data type representing a company</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name" type="xs:string"/>
+			<xs:element name="name" type="Name"/>
 			<xs:element name="logo" type="File" minOccurs="0"/>
 			<xs:element name="address" type="PostalAddress" minOccurs="0"/>
 			<xs:element name="phone" type="PhoneNumber"/>
 			<xs:element name="fax" type="PhoneNumber" minOccurs="0"/>
 			<xs:element name="url" type="xs:anyURI"/>
-			<xs:element name="parentCompany" type="xs:IDREF" minOccurs="0"/>
+			<xs:element name="parentCompany" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="name" type="Name"/>
+						<xs:element name="id" type="Identifier" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="identifiers" type="Identifier" minOccurs="0"/>
 		</xs:sequence>
-		<xs:attribute name="id" type="xs:ID"/>
 	</xs:complexType>
 	<xs:complexType name="Transactor">
 		<xs:annotation>
@@ -54,6 +62,13 @@
 				<xs:complexType>
 					<xs:sequence minOccurs="0" maxOccurs="unbounded">
 						<xs:element name="contact" type="Person"/>
+						<xs:element name="role">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="25"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -135,9 +150,10 @@
 			<xs:documentation>data type that represents a computer system</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name"/>
+			<xs:element name="name" type="Name"/>
 			<xs:element name="vendor" type="Company"/>
 			<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+			<xs:element name="identifier" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Dimension">
@@ -172,6 +188,39 @@
 			<xs:enumeration value="centimeters"/>
 			<xs:enumeration value="millimeters"/>
 			<xs:enumeration value="feet"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AdUnit">
+		<xs:sequence>
+			<xs:element name="name"/>
+			<xs:element name="isIABStandard" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether or not this is an IAB Standard Ad Unit</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="initialDimensions"/>
+			<xs:element name="maxExpandedDimensions" minOccurs="0"/>
+			<xs:element name="maxInitialFileLoadSize">
+				<xs:annotation>
+					<xs:documentation>The maximum size of the creative file.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="supportedMediaTypes" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="mediaType" type="MediaType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Channel">
+		<xs:annotation>
+			<xs:documentation>the type of channel</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="email"/>
+			<xs:enumeration value="onlineDisplay"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="AdTag">
@@ -215,7 +264,7 @@
 			<xs:documentation>data type representing a file</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name" type="xs:string">
+			<xs:element name="name" type="Name">
 				<xs:annotation>
 					<xs:documentation>The name of the file</xs:documentation>
 				</xs:annotation>
@@ -240,8 +289,182 @@
 	</xs:complexType>
 	<xs:simpleType name="Note">
 		<xs:annotation>
-			<xs:documentation>data type representing a note</xs:documentation>
+			<xs:documentation>data type representing a note. Should be implemented as a CLOB field in the database.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:string"/>
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="preserve"/>
+		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="Name">
+		<xs:annotation>
+			<xs:documentation>data type representing the name of an item</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="80"/>
+			<xs:minLength value="1"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Quantity">
+		<xs:annotation>
+			<xs:documentation>Expresses a quantity of something - impressions, clicks, views, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:long">
+				<xs:attribute name="unitOfMeasurement" type="UnitOfMeasurement"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="UnitOfMeasurement">
+		<xs:annotation>
+			<xs:documentation>Enumeration of standard unit types used in the industry.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Impressions"/>
+			<xs:enumeration value="Clicks"/>
+			<xs:enumeration value="Actions"/>
+			<xs:enumeration value="Uniques"/>
+			<xs:enumeration value="ShareOfVoice"/>
+			<xs:enumeration value="Downloads"/>
+			<xs:enumeration value="Emails"/>
+			<xs:enumeration value="Leads"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Percentage">
+		<xs:annotation>
+			<xs:documentation>A percentage represented as a decimal value betwee 0 and 100 inclusive.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="100"/>
+			<xs:totalDigits value="5"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DocumentSource">
+		<xs:annotation>
+			<xs:documentation>data type representing the source of a document</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="person" type="Person"/>
+			<xs:element name="company" type="Company" minOccurs="0"/>
+			<xs:element name="system" type="System" minOccurs="0"/>
+			<xs:element name="timestamp" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Identifier">
+		<xs:annotation>
+			<xs:documentation>data type for identifier (or "id") of objects</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="idOwner" type="Name">
+					<xs:annotation>
+						<xs:documentation>the entity that originates and "owns" this identifier. E.g. "Acme Corp."</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="LegalTerms">
+		<xs:annotation>
+			<xs:documentation>data type representing the legal terms of a transaction</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="iabStandardTerms">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:boolean">
+							<xs:attribute name="version" type="xs:decimal" default="3.0"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="outClause" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If not present, there is no out clause.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="isOutClause" type="xs:boolean">
+							<xs:annotation>
+								<xs:documentation>True if there is an out clause. False otherwise.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="numberOfDays" type="xs:short">
+							<xs:annotation>
+								<xs:documentation>Number of days notice required on a cancellation.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="notes" type="Note" minOccurs="0"/>
+			<xs:element name="attachment" type="File" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FinancialTerms">
+		<xs:annotation>
+			<xs:documentation>data type representing the financial terms of a transaction</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="paymentTerms" type="PaymentTerms"/>
+			<xs:element name="billingFrequency" default="monthly">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="weekly"/>
+						<xs:enumeration value="monthly"/>
+						<xs:enumeration value="quarterly"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="systemOfRecord" default="advertiser">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="advertiser"/>
+						<xs:enumeration value="publisher"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="agencyCommission" type="Discount" minOccurs="0"/>
+			<xs:element name="discount" type="Discount" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="notes" type="Note" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PaymentTerms">
+		<xs:annotation>
+			<xs:documentation>Payment terms for an order (e.g. Net30)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Advance"/>
+			<xs:enumeration value="Net15"/>
+			<xs:enumeration value="Net30"/>
+			<xs:enumeration value="Net60"/>
+			<xs:enumeration value="EndOfContract"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Discount">
+		<xs:annotation>
+			<xs:documentation>A discounting structure. Allows for specifying either a monetary discount or a percentage discount.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Description" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of the discount.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="Percent" type="Percentage">
+					<xs:annotation>
+						<xs:documentation>A percentage represented as a decimal value betwee 0 and 100 inclusive.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Amount" type="Money">
+					<xs:annotation>
+						<xs:documentation>Monetary amount of the discount.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>

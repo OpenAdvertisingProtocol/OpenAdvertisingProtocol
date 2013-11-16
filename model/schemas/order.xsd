@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
+<!-- edited with XMLSpy v2014 (http://www.altova.com) by Joe Pych (Bionic Advertising Services) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:include schemaLocation="common.xsd"/>
 	<xs:include schemaLocation="program.xsd"/>
@@ -13,27 +13,38 @@
 			<xs:documentation>This is the insertion order data type</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="orderNumber">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="25"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="version" type="xs:short" minOccurs="0"/>
+			<xs:element name="orderDate" type="xs:date"/>
 			<xs:element name="buyer" type="Transactor"/>
 			<xs:element name="seller" type="Transactor"/>
 			<xs:element name="advertiser" type="Transactor"/>
-			<xs:element name="flightDates" type="TimeSpan">
-				<xs:annotation>
-					<xs:documentation>The earliest start date and the latest end date for all line items in this order.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="lineItems">
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="lineItem" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="sequenceNumber" type="xs:int"/>
-									<xs:element name="name"/>
+									<xs:element name="sequenceNumber" type="xs:int">
+										<xs:annotation>
+											<xs:documentation>The order in which this line appear in the order</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="name" type="Name"/>
 									<xs:choice>
 										<xs:element name="placement">
 											<xs:complexType>
 												<xs:sequence>
 													<xs:element name="program">
+														<xs:annotation>
+															<xs:documentation>The advertising program. E.g. "AutoTrader.com"</xs:documentation>
+														</xs:annotation>
 														<xs:complexType>
 															<xs:sequence>
 																<xs:element name="id" type="xs:IDREF" minOccurs="0"/>
@@ -41,8 +52,16 @@
 															</xs:sequence>
 														</xs:complexType>
 													</xs:element>
-													<xs:element name="placement" type="Placement"/>
-													<xs:element name="targeting"/>
+													<xs:element name="placement" type="Placement">
+														<xs:annotation>
+															<xs:documentation>The Program's placement. E.g. "Sedan's section 300x250"</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="targeting" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Additional targeting options. E.g. "gender=female" and "income>$100,000" TODO: data structure.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
 													<xs:element name="creative" minOccurs="0">
 														<xs:annotation>
 															<xs:documentation>creative tags or assets can optionally be included in the order.</xs:documentation>
@@ -94,39 +113,85 @@
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
-									<xs:element name="quantity"/>
-									<xs:element name="rate"/>
-									<xs:element name="amount"/>
-									<xs:element name="isGuaranteed" type="xs:boolean"/>
+									<xs:element name="quantity" type="Quantity" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>optional if placement is part of package</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="rate" type="Rate" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>optional if placement is part of package</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="amount" type="Money" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>optional if placement is part of package</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="isGuaranteed" type="xs:boolean">
+										<xs:annotation>
+											<xs:documentation>True if this line item's quantity is guaranteed. False otherwise. Optional if placement is part of package.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
 									<xs:element name="notes" type="Note" minOccurs="0"/>
-									<xs:element name="sellerId" minOccurs="0">
-										<xs:annotation>
-											<xs:documentation>The seller's identifier for this line item</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="buyerId" minOccurs="0">
-										<xs:annotation>
-											<xs:documentation>The buyer's identifier for this line item.</xs:documentation>
-										</xs:annotation>
-									</xs:element>
+									<xs:element name="identifiers" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="flightDates" type="TimeSpan">
+				<xs:annotation>
+					<xs:documentation>The earliest start date and the latest end date for all line items in this order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="amount" type="Money"/>
 			<xs:element name="terms">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="financial"/>
-						<xs:element name="legal"/>
+						<xs:element name="financial">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="paymentTerms" type="PaymentTerms"/>
+									<xs:element name="billingFrequency" default="monthly">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="weekly"/>
+												<xs:enumeration value="monthly"/>
+												<xs:enumeration value="quarterly"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="systemOfRecord" default="advertiser">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="advertiser"/>
+												<xs:enumeration value="publisher"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="agencyCommission" type="Discount" minOccurs="0"/>
+									<xs:element name="discount" type="Discount" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="notes" type="Note" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="legal" type="LegalTerms"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="notes" type="xs:string" minOccurs="0"/>
+			<xs:element name="notes" type="Note" minOccurs="0"/>
+			<xs:element name="systemInfo" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="created" type="DocumentSource"/>
+						<xs:element name="updated" type="DocumentSource"/>
+						<xs:element name="identifiers" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
-		<xs:attribute name="id" type="xs:ID"/>
 	</xs:complexType>
 	<xs:simpleType name="PackageType">
 		<xs:restriction base="xs:string">
@@ -140,18 +205,6 @@
 					<xs:documentation>A roadblock placement is typically a group of placements that are all served on a webpage together. Cost information will be associated whenever any or all placements in the Roadblock receive an impression.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="Compatability">
-		<xs:annotation>
-			<xs:documentation>Compatibility tells you which creatives work on your placement. This determines which creatives and ads you can assign to the placement. DCM makes sure that all the creatives in your ads work in the placement environment. For example, if a placement has in-page compatibility, DCM only allows you to assign ads if their creatives work on a browser page. If a placement has in-stream compatibility, DCM only allows you to assign ads if their creatives work in a video player (in-stream video creatives).This ensures that render on the placement.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="In-page"/>
-			<xs:enumeration value="In-page interstitial"/>
-			<xs:enumeration value="In-app"/>
-			<xs:enumeration value="In-app interstitial"/>
-			<xs:enumeration value="In-stream video"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
