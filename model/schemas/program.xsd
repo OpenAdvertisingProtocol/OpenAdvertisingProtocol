@@ -90,49 +90,4 @@
 			<xs:enumeration value="[...iab standard categories to be entered ...]"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:complexType name="AudienceProfile">
-		<xs:annotation>
-			<xs:documentation>data type representing an audience profile</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="malePercent" type="Percentage" minOccurs="0"/>
-			<xs:element name="femalePercent" type="Percentage" minOccurs="0"/>
-			<xs:element name="averageIncome" type="Money" minOccurs="0"/>
-			<xs:element name="dimension" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>For providing frequency distributions that give insight to the program's audience.</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="name" type="Name">
-							<xs:annotation>
-								<xs:documentation>The name of the dimension. E.g. "Education"</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="value" maxOccurs="unbounded">
-							<xs:annotation>
-								<xs:documentation>Each dimension can have many values.</xs:documentation>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="name" type="Name">
-										<xs:annotation>
-											<xs:documentation>The name of the value E.g. "College Graduate"</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="monthlyUniques" type="xs:double" minOccurs="0">
-										<xs:annotation>
-											<xs:documentation>The average number of monthly uniques for this value.</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="percentOfVisitors" type="Percentage" minOccurs="0"/>
-									<xs:element name="quantity" type="Quantity" minOccurs="0" maxOccurs="unbounded"/>
-								</xs:sequence>
-							</xs:complexType>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 </xs:schema>

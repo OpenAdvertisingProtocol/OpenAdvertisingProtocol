@@ -187,7 +187,7 @@
 					<xs:sequence>
 						<xs:element name="created" type="DocumentSource"/>
 						<xs:element name="updated" type="DocumentSource"/>
-						<xs:element name="identifiers" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="id" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
