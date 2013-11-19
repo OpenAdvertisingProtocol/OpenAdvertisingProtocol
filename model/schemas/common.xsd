@@ -478,6 +478,7 @@
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="name" type="Name"/>
+			<xs:element name="source" type="DocumentSource"/>
 			<xs:element name="id" type="Identifier" maxOccurs="unbounded"/>
 			<xs:element name="universe" type="Quantity" maxOccurs="unbounded"/>
 			<xs:element name="distribution" minOccurs="0" maxOccurs="unbounded">
@@ -557,7 +558,6 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="source" type="DocumentSource"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:simpleType name="IndexedValue">
