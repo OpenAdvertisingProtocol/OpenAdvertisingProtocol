@@ -23,7 +23,7 @@
 			<xs:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="monthlyUniques" type="xs:long" minOccurs="0"/>
 			<xs:element name="document" type="File" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="profile" type="AudienceProfile" minOccurs="0"/>
+			<xs:element name="profile" type="AudienceProfile" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="endorsement" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:sequence>
@@ -66,7 +66,7 @@
 					<xs:documentation>negotiated rate for the user that is accessing this placement.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="profile" type="AudienceProfile" minOccurs="0"/>
+			<xs:element name="profile" type="AudienceProfile" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="inventoryAvailable" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:sequence>
