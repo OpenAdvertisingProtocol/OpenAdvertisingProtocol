@@ -203,21 +203,10 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:simpleType name="PackageType">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="standard">
-				<xs:annotation>
-					<xs:documentation>A standard package can be used to group any placements in a cost strategy together. Cost will be attributed identically across all impressions within the Package, regardless of which placement received the impression.</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="roadblock">
-				<xs:annotation>
-					<xs:documentation>A roadblock placement is typically a group of placements that are all served on a webpage together. Cost information will be associated whenever any or all placements in the Roadblock receive an impression.</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:complexType name="DayParts">
+		<xs:annotation>
+			<xs:documentation>the day parts for a single day</xs:documentation>
+		</xs:annotation>
 		<xs:choice>
 			<xs:element name="all">
 				<xs:annotation>
@@ -249,6 +238,9 @@
 		</xs:choice>
 	</xs:complexType>
 	<xs:complexType name="DayPartSchedule">
+		<xs:annotation>
+			<xs:documentation>schedule of dayparts monday through sunday</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="schedulingTimeZone">
 				<xs:annotation>
@@ -271,6 +263,9 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:simpleType name="DeliveryPolicy">
+		<xs:annotation>
+			<xs:documentation>policy for delivering ad impressions e.g. evenly, frontloaded, asap</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="evenly">
 				<xs:annotation>
@@ -290,6 +285,9 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="FrequencyCap">
+		<xs:annotation>
+			<xs:documentation>the frequency capping policy for a placement</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="maxImpressions" type="xs:positiveInteger"/>
 			<xs:element name="numTimeUnits">
@@ -315,6 +313,9 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:simpleType name="LineItemStatus">
+		<xs:annotation>
+			<xs:documentation>the status of a line item, e.g. pending, rejected, ready, completed</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="Draft">
 				<xs:annotation>
@@ -364,6 +365,9 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="OrderStatus">
+		<xs:annotation>
+			<xs:documentation>the status of an order e.g. pending approval, approved, rejected.</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="Draft"/>
 			<xs:enumeration value="PendingApproval"/>
@@ -372,6 +376,23 @@
 			<xs:enumeration value="Paused"/>
 			<xs:enumeration value="Canceled"/>
 			<xs:enumeration value="Deleted"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PackageType">
+		<xs:annotation>
+			<xs:documentation>the type of package: standard or roadblock</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="standard">
+				<xs:annotation>
+					<xs:documentation>A standard package can be used to group any placements in a cost strategy together. Cost will be attributed identically across all impressions within the Package, regardless of which placement received the impression.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="roadblock">
+				<xs:annotation>
+					<xs:documentation>A roadblock placement is typically a group of placements that are all served on a webpage together. Cost information will be associated whenever any or all placements in the Roadblock receive an impression.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

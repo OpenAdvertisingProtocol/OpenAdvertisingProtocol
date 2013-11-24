@@ -50,6 +50,14 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="Category">
+		<xs:annotation>
+			<xs:documentation>Enumeration of IAB standard categories</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="[...iab standard categories to be entered ...]"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:complexType name="Product">
 		<xs:annotation>
 			<xs:documentation>this data type represents a product within an advertising program</xs:documentation>
@@ -99,12 +107,4 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:simpleType name="Category">
-		<xs:annotation>
-			<xs:documentation>Enumeration of IAB standard categories</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="[...iab standard categories to be entered ...]"/>
-		</xs:restriction>
-	</xs:simpleType>
 </xs:schema>
