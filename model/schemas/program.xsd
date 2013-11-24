@@ -18,7 +18,7 @@
 			<xs:element name="lastUpdated" type="xs:dateTime"/>
 			<xs:element name="description" type="Note" minOccurs="0"/>
 			<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
-			<xs:element name="placement" type="Placement" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="product" type="Product" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="channel" type="Channel" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="monthlyUniques" type="xs:long" minOccurs="0"/>
@@ -50,23 +50,24 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="Placement">
+	<xs:complexType name="Product">
 		<xs:annotation>
-			<xs:documentation>this data type represents a placement within an advertising program</xs:documentation>
+			<xs:documentation>this data type represents a product within an advertising program</xs:documentation>
 		</xs:annotation>
 		<xs:sequence minOccurs="1" maxOccurs="1">
 			<xs:element name="name" type="Name"/>
 			<xs:element name="identifier" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="description" type="Note" minOccurs="0"/>
 			<xs:element name="channel" type="Channel"/>
-			<xs:element name="adUnit" type="AdUnit"/>
+			<xs:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="profile" type="AudienceProfile" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="adUnit" type="AdUnit" maxOccurs="unbounded"/>
 			<xs:element name="standardRate" type="Rate" minOccurs="0"/>
 			<xs:element name="ourRate" type="Rate" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>negotiated rate for the user that is accessing this placement.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="profile" type="AudienceProfile" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="inventoryAvailable" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:sequence>
@@ -75,9 +76,25 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="profile" type="AudienceProfile" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="targeting" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The targeting options available for this placement. TODO: define this!</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minimumPurchase" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The minimum amount this product can be purchased for.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minimumDurationDays" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The minimum number of days in the duration of delivery start date to end date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minimumLeadTimeDays" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The number of days the order has to be finalized in advance of the delivery start date.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

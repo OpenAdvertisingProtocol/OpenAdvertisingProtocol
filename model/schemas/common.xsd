@@ -198,14 +198,15 @@
 	<xs:complexType name="AdUnit">
 		<xs:sequence>
 			<xs:element name="name"/>
+			<xs:element name="identifier" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="isIABStandard" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Indicates whether or not this is an IAB Standard Ad Unit</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="initialDimensions"/>
-			<xs:element name="maxExpandedDimensions" minOccurs="0"/>
-			<xs:element name="maxInitialFileLoadSize">
+			<xs:element name="initialDimensions" type="Dimension"/>
+			<xs:element name="maxExpandedDimensions" type="Dimension" minOccurs="0"/>
+			<xs:element name="maxInitialFileLoadSize" type="FileSize" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The maximum size of the creative file.</xs:documentation>
 				</xs:annotation>
@@ -289,8 +290,9 @@
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
+			<xs:element name="mediaType" type="MediaType"/>
+			<xs:element name="fileSize" type="FileSize" minOccurs="0"/>
 		</xs:sequence>
-		<xs:attribute name="mediaType" type="MediaType"/>
 	</xs:complexType>
 	<xs:simpleType name="Note">
 		<xs:annotation>
@@ -601,5 +603,29 @@
 				<xs:element name="number" type="xs:decimal"/>
 			</xs:choice>
 		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FileSize">
+		<xs:annotation>
+			<xs:documentation>represents the size of a file</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:decimal">
+				<xs:attribute name="unitOfMeasure">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="bytes"/>
+							<xs:enumeration value="kilobytes"/>
+							<xs:enumeration value="megabytes"/>
+							<xs:enumeration value="gigabytes"/>
+							<xs:enumeration value="terabytes"/>
+							<xs:enumeration value="petabytes"/>
+							<xs:enumeration value="exabytes"/>
+							<xs:enumeration value="zettabytes"/>
+							<xs:enumeration value="yottabytes"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
 	</xs:complexType>
 </xs:schema>

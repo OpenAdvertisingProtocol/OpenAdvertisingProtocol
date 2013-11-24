@@ -13,6 +13,7 @@
 			<xs:documentation>This is the insertion order data type</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="name" type="Name"/>
 			<xs:element name="orderNumber">
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -37,6 +38,7 @@
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="name" type="Name"/>
+									<xs:element name="identifiers" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
 									<xs:choice>
 										<xs:element name="placement">
 											<xs:complexType>
@@ -52,9 +54,14 @@
 															</xs:sequence>
 														</xs:complexType>
 													</xs:element>
-													<xs:element name="placement" type="Placement">
+													<xs:element name="product" type="Product">
 														<xs:annotation>
-															<xs:documentation>The Program's placement. E.g. "Sedan's section 300x250"</xs:documentation>
+															<xs:documentation>The Program's product. E.g. "Sedan's section 300x250"</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="dayparts" type="DayPartSchedule" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>optional dayparting schedule</xs:documentation>
 														</xs:annotation>
 													</xs:element>
 													<xs:element name="targeting" minOccurs="0">
@@ -81,7 +88,7 @@
 												</xs:sequence>
 											</xs:complexType>
 										</xs:element>
-										<xs:element name="package"/>
+										<xs:element name="package" type="PackageType"/>
 									</xs:choice>
 									<xs:element name="testingStartDate" type="xs:dateTime" minOccurs="0">
 										<xs:annotation>
@@ -118,23 +125,26 @@
 											<xs:documentation>optional if placement is part of package</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="rate" type="Rate" minOccurs="0">
-										<xs:annotation>
-											<xs:documentation>optional if placement is part of package</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="amount" type="Money" minOccurs="0">
-										<xs:annotation>
-											<xs:documentation>optional if placement is part of package</xs:documentation>
-										</xs:annotation>
-									</xs:element>
 									<xs:element name="isGuaranteed" type="xs:boolean">
 										<xs:annotation>
 											<xs:documentation>True if this line item's quantity is guaranteed. False otherwise. Optional if placement is part of package.</xs:documentation>
 										</xs:annotation>
 									</xs:element>
+									<xs:element name="deliveryPolicy" type="DeliveryPolicy" minOccurs="0"/>
+									<xs:element name="frequencyCap" type="FrequencyCap" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="rate" type="Rate" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>optional if placement is part of package</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="discount" type="Discount" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="amount" type="Money" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>optional if placement is part of package</xs:documentation>
+										</xs:annotation>
+									</xs:element>
 									<xs:element name="notes" type="Note" minOccurs="0"/>
-									<xs:element name="identifiers" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="status" type="LineItemStatus" minOccurs="0"/>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
@@ -205,6 +215,163 @@
 					<xs:documentation>A roadblock placement is typically a group of placements that are all served on a webpage together. Cost information will be associated whenever any or all placements in the Roadblock receive an impression.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DayParts">
+		<xs:choice>
+			<xs:element name="all">
+				<xs:annotation>
+					<xs:documentation>Choose this to indicate the ad should run all day.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="none">
+				<xs:annotation>
+					<xs:documentation>Choose this to indicate the ad should not run at all on this day.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="parts">
+				<xs:annotation>
+					<xs:documentation>Choose this to indicate the ad should run specified parts of the day.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="part" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="startTime" type="xs:time"/>
+									<xs:element name="endTime"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="DayPartSchedule">
+		<xs:sequence>
+			<xs:element name="schedulingTimeZone">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the schedule is governed by the publisher's or the user's time zone.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="publisherTimeZone"/>
+						<xs:enumeration value="userTimeZone"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="monday" type="DayParts"/>
+			<xs:element name="tuesday" type="DayParts"/>
+			<xs:element name="wednesday" type="DayParts"/>
+			<xs:element name="thursday" type="DayParts"/>
+			<xs:element name="friday" type="DayParts"/>
+			<xs:element name="saturday" type="DayParts"/>
+			<xs:element name="sunday" type="DayParts"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="DeliveryPolicy">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="evenly">
+				<xs:annotation>
+					<xs:documentation>Delivers impressions equally over the course of the campaign.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="frontloaded">
+				<xs:annotation>
+					<xs:documentation>Attempts to deliver impressions ahead of schedule by as much as 25% in the first half of the campaign, returns to evenly distributed impressions in the second half.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="asap">
+				<xs:annotation>
+					<xs:documentation>Delivers up to the impression goal as quickly as possible.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="FrequencyCap">
+		<xs:sequence>
+			<xs:element name="maxImpressions" type="xs:positiveInteger"/>
+			<xs:element name="numTimeUnits">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:nonNegativeInteger">
+							<xs:attribute name="timeUnit">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="minutes"/>
+										<xs:enumeration value="hours"/>
+										<xs:enumeration value="days"/>
+										<xs:enumeration value="weeks"/>
+										<xs:enumeration value="months"/>
+										<xs:enumeration value="lifetime"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="LineItemStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Draft">
+				<xs:annotation>
+					<xs:documentation>The LineItem is still being drafted.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PendingApproval">
+				<xs:annotation>
+					<xs:documentation>The LineItem has been submitted for approval.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Rejected">
+				<xs:annotation>
+					<xs:documentation>The LineItem has been rejected and is not eligible to serve.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AwaitingCreative">
+				<xs:annotation>
+					<xs:documentation>The LineItem needs at least one more creative to be associated with it before it can run.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Ready">
+				<xs:annotation>
+					<xs:documentation>The LineItem has been activated and is ready to serve.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Delivering">
+				<xs:annotation>
+					<xs:documentation>The LineItem has begun serving.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Paused">
+				<xs:annotation>
+					<xs:documentation>The LineItem has been paused from serving.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PausedInventoryReleased">
+				<xs:annotation>
+					<xs:documentation>The LineItem has been paused and its reserved inventory has been released. The LineItem will not serve.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Completed">
+				<xs:annotation>
+					<xs:documentation>The LineItem has completed its run.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OrderStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Draft"/>
+			<xs:enumeration value="PendingApproval"/>
+			<xs:enumeration value="Approved"/>
+			<xs:enumeration value="Rejected"/>
+			<xs:enumeration value="Paused"/>
+			<xs:enumeration value="Canceled"/>
+			<xs:enumeration value="Deleted"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
