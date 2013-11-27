@@ -159,4 +159,16 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="Targeting">
+		<xs:annotation>
+			<xs:documentation>data type representing targeting options</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="todo">
+				<xs:annotation>
+					<xs:documentation>This needs to be done. waiting on group feedback before starting with it.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>

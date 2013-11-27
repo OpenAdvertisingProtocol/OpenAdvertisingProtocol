@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 (http://www.altova.com) by Joe Pych (Bionic Advertising Services) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:include schemaLocation="program.xsd"/>
+	<xs:element name="rfp" type="RFP">
+		<xs:annotation>
+			<xs:documentation>request for proposal</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RFP">
+		<xs:annotation>
+			<xs:documentation>data type representing a Request for Proposal.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id">
+				<xs:annotation>
+					<xs:documentation>The ID of this RFP</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="campaignName" type="Name"/>
+			<xs:element name="requestSent" type="xs:dateTimeStamp">
+				<xs:annotation>
+					<xs:documentation>the timestamp when this RFP was first sent</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="buyer" type="Transactor"/>
+			<xs:element name="seller" type="Transactor"/>
+			<xs:element name="advertiser" type="Transactor" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>buyer can optionally reveal the advertiser in the RFP process</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sellerBudget" type="Money" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Buyer may ask for proposals at multiple budget levels</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Buyer may indicate the categories for the campaign</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="channel" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>buyer must indicate which channels they are advertising in.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="targeting" type="Targeting" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>targeting requirements: geotargeting, demographics, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="requirements" type="Note">
+				<xs:annotation>
+					<xs:documentation>free form description of buyer requirements.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attachment" type="File" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>optional  file attachments such as an RFP doc, response template, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="proposalDueDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>the date on which the seller's proposal is due back to the buyer to be considered for the campaign.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="systemInformation" type="SystemInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

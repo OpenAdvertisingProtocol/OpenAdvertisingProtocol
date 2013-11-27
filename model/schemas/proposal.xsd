@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 (http://www.altova.com) by Joe Pych (Bionic Advertising Services) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:include schemaLocation="order.xsd"/>
+	<xs:element name="proposal" type="Proposal">
+		<xs:annotation>
+			<xs:documentation>a media proposal</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="Proposal">
+		<xs:annotation>
+			<xs:documentation>data type for a proposal</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id">
+				<xs:annotation>
+					<xs:documentation>the ID of this proposal</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="version" type="xs:nonNegativeInteger" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Optionally indicates the version of this proposal in case of re-submittions.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="Name">
+				<xs:annotation>
+					<xs:documentation>the name of this proposal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="buyer" type="Transactor"/>
+			<xs:element name="seller" type="Transactor"/>
+			<xs:element name="advertiser" type="Transactor" minOccurs="0"/>
+			<xs:element name="campaignName" type="Name"/>
+			<xs:element name="rfpID" type="Identifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>identifies the RFP this proposal is in response to. Not required if unsolicited.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lineItem" type="OrderLineItem" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="totalAmount" type="Money">
+				<xs:annotation>
+					<xs:documentation>The total amount of the proposal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="totalQuantity" type="Quantity" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The total quanitity of impressions, clicks, etc. represented in this proposal.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eCPM" type="Rate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The effective cost per thousand impressions in this proposal (optional).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rationale" type="Note" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Explains the basis for this proposal. Why do the products represented in this proposal deserve to be ordered for the campaign?</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attachment" type="File" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>attachments that support the rational such as media kits, screen shots, spread sheets, powerpoints.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expiryDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>optionally indicates the date on which this propoal expires</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="systemInformation" type="SystemInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

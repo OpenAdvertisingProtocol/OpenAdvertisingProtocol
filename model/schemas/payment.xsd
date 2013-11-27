@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 (http://www.altova.com) by Joe Pych (Bionic Advertising Services) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:element name="payment" type="Payment">
+		<xs:annotation>
+			<xs:documentation>a payment</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="Payment">
+		<xs:annotation>
+			<xs:documentation>data type for a payment</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>the date this payment is being applied. e.g. the date the check was received.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="maker" type="Transactor">
+				<xs:annotation>
+					<xs:documentation>The party making the payment. Most often the buyer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="payee" type="Transactor">
+				<xs:annotation>
+					<xs:documentation>The party rgetting paid. Most often the seller.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cash" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>cash is optional if this payment is just using credits</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="check" type="Check"/>
+						<xs:element name="wireTransfer" type="WireTransfer"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="credit" type="Credit" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>credits can also be applied in a payment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="paymentAmount" type="Money">
+				<xs:annotation>
+					<xs:documentation>the total amount of the payment which is the sum of the cash (if any) and all credits to be applied.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="applicationOfPayment" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>a payment can be applied to many invoices</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="invoiceNumber" type="Identifier">
+							<xs:annotation>
+								<xs:documentation>the invoice to which this payment is being applied.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="amount" type="Money">
+							<xs:annotation>
+								<xs:documentation>the amount being appied to this invoice</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="notes" type="Note" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>optional notes on this payment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="systemInformation" type="SystemInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BankAccount">
+		<xs:annotation>
+			<xs:documentation>data type for a bank account</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bankName" type="Name"/>
+			<xs:element name="transitNumber" type="xs:int"/>
+			<xs:element name="accountName" type="Name"/>
+			<xs:element name="accountNumber">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Check">
+		<xs:annotation>
+			<xs:documentation>data type for a check</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="checkNumber">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="bankAccount" type="BankAccount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>the account from which the amount will be drawn</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="date" type="xs:date"/>
+			<xs:element name="amount" type="Money"/>
+			<xs:element name="memo" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Credit">
+		<xs:annotation>
+			<xs:documentation>data type for a credit</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="Identifier"/>
+			<xs:element name="name" type="Name"/>
+			<xs:element name="amount" type="Money"/>
+			<xs:element name="notes" type="Note" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WireTransfer">
+		<xs:annotation>
+			<xs:documentation>data type for a wire transfer</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="referenceNumber">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="date" type="xs:date"/>
+			<xs:element name="amount" type="Money"/>
+			<xs:element name="memo" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
