@@ -58,6 +58,58 @@
 			<xs:enumeration value="[...iab standard categories to be entered ...]"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="DiscountCode">
+		<xs:annotation>
+			<xs:documentation>an expiring discount code that a buyer can redeem when ordering</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="Name">
+				<xs:annotation>
+					<xs:documentation>the name of the discount code. E.g. "25% off 300x250s"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="seller" type="Company"/>
+			<xs:element name="discountCode">
+				<xs:annotation>
+					<xs:documentation>The actual discount code. E.g. "saleus25-300x250"</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="discount" type="Discount"/>
+			<xs:element name="appliesTo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>by default, discount codes apply to all products by a seller. Use this to constrain.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="allProducts"/>
+						<xs:element name="specifiedProducts">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="program" type="Program" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="product" type="Product" minOccurs="0" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="validFromTimeStamp" type="xs:dateTimeStamp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>By default, there is so start date. Use this to constrain vailidity.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validUntilTimeStamp" type="xs:dateTimeStamp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>By default, this code is valid forever. Use this to constrain the end date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="Product">
 		<xs:annotation>
 			<xs:documentation>this data type represents a product within an advertising program</xs:documentation>

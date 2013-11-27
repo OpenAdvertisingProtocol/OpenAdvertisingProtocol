@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
+<!-- edited with XMLSpy v2014 (http://www.altova.com) by Joe Pych (Bionic Advertising Services) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:include schemaLocation="common.xsd"/>
 	<xs:include schemaLocation="program.xsd"/>
@@ -191,6 +191,7 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="discount" type="Discount" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="discountCode" type="DiscountCode" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="amount" type="Money" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>optional if placement is part of package</xs:documentation>
