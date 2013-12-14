@@ -13,7 +13,7 @@
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="reference" type="ObjectReference"/>
-			<xs:element name="instance">
+			<xs:element name="instance" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="invoiceDate" type="xs:date"/>
