@@ -190,21 +190,39 @@
 			<xs:documentation>data type representing a company</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name" type="Name"/>
-			<xs:element name="logo" type="File" minOccurs="0"/>
-			<xs:element name="address" type="PostalAddress" minOccurs="0"/>
-			<xs:element name="phone" type="PhoneNumber"/>
-			<xs:element name="fax" type="PhoneNumber" minOccurs="0"/>
-			<xs:element name="url" type="xs:anyURI"/>
-			<xs:element name="parentCompany" minOccurs="0">
+			<xs:element name="reference" type="ObjectReference"/>
+			<xs:element name="instance" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="name" type="Name"/>
-						<xs:element name="id" type="Identifier" minOccurs="0"/>
+						<xs:element name="logo" type="File" minOccurs="0"/>
+						<xs:element name="address" type="PostalAddress" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The company's main address.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="phone" type="PhoneNumber">
+							<xs:annotation>
+								<xs:documentation>The company's main phone number.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="fax" type="PhoneNumber" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The company's main fax number.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="websiteURL" type="xs:anyURI">
+							<xs:annotation>
+								<xs:documentation>The URL of the company's website.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="parentCompany" type="Company" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>If part of a company hierarchy, this is the parent company.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="identifiers" type="Identifier" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:simpleType name="CostMethod">
@@ -459,6 +477,44 @@
 			<xs:whiteSpace value="preserve"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="ObjectReference">
+		<xs:annotation>
+			<xs:documentation>A general way of referring to primary objects in the OAP - programs, orders, invoices, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="Name">
+				<xs:annotation>
+					<xs:documentation>The name of the object. E.g.  the person's name, the product's name, the package's name, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="referenceNumber">
+				<xs:annotation>
+					<xs:documentation>The reference number of the object. E.g. the invoice number or the order number.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="25"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="version" type="xs:nonNegativeInteger" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Optionally indicates the version of the object. E.g. an Order may have many versions before being finalized.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="url" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The URL to get the full and current instance of the object.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="systemInformation" type="SystemInformation" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides tracking info such as who created and when, who updated and when, and other system identifiers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:simpleType name="PaymentTerms">
 		<xs:annotation>
 			<xs:documentation>Payment terms for an order (e.g. Net30)</xs:documentation>
@@ -487,29 +543,24 @@
 			<xs:documentation>data type representing a person</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name" type="Name">
-				<xs:annotation>
-					<xs:documentation>This is the name of the person "Jane Doe" or of the function "Accounts Receivable"</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="firstName" minOccurs="0"/>
-			<xs:element name="lastName" minOccurs="0"/>
-			<xs:element name="photo" type="File" minOccurs="0"/>
-			<xs:element name="jobTitle" minOccurs="0"/>
-			<xs:element name="company">
+			<xs:element name="reference" type="ObjectReference"/>
+			<xs:element name="instance" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="name" type="Name"/>
-						<xs:element name="id" type="Identifier" minOccurs="0"/>
+						<xs:element name="firstName" minOccurs="0"/>
+						<xs:element name="lastName" minOccurs="0"/>
+						<xs:element name="photo" type="File" minOccurs="0"/>
+						<xs:element name="jobTitle" minOccurs="0"/>
+						<xs:element name="company" type="Company"/>
+						<xs:element name="email" type="EmailAddress"/>
+						<xs:element name="address" type="PostalAddress" minOccurs="0"/>
+						<xs:element name="workPhone" type="PhoneNumber" minOccurs="0"/>
+						<xs:element name="mobilePhone" type="PhoneNumber" minOccurs="0"/>
+						<xs:element name="faxNumber" type="PhoneNumber" minOccurs="0"/>
+						<xs:element name="notes" type="Note" minOccurs="0"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="email" type="EmailAddress"/>
-			<xs:element name="address" type="PostalAddress" minOccurs="0"/>
-			<xs:element name="workPhone" type="PhoneNumber" minOccurs="0"/>
-			<xs:element name="mobilePhone" type="PhoneNumber" minOccurs="0"/>
-			<xs:element name="faxNumber" type="PhoneNumber" minOccurs="0"/>
-			<xs:element name="identifiers" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:simpleType name="PhoneNumber">

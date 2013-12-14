@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by Joe Pych (NextMark) -->
+<!-- edited with XMLSpy v2014 (http://www.altova.com) by Joe Pych (Bionic Advertising Services) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:include schemaLocation="order.xsd"/>
 	<xs:element name="invoice">
@@ -12,66 +12,63 @@
 			<xs:documentation>data type representing an invoice</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="invoiceNumber">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="20"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-			<xs:element name="identifier" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="invoiceDate" type="xs:date"/>
-			<xs:element name="invoiceVersion" type="xs:nonNegativeInteger" minOccurs="0"/>
-			<xs:element name="billTo" type="Person"/>
-			<xs:element name="billingPeriod" type="TimeSpan"/>
-			<xs:element name="seller" type="Transactor"/>
-			<xs:element name="buyer" type="Transactor"/>
-			<xs:element name="advertiser" type="Transactor"/>
-			<xs:element name="campaignName" type="Name"/>
-			<xs:element name="flightDates" type="TimeSpan"/>
-			<xs:element name="insertionOrder" type="Order">
-				<xs:annotation>
-					<xs:documentation>TODO: should we enable more than one IO to be billed in an invoice?</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="lineItems">
+			<xs:element name="reference" type="ObjectReference"/>
+			<xs:element name="instance">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="lineItem" type="InvoiceLineItem" maxOccurs="unbounded"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="buyerCommission" type="Money" minOccurs="0"/>
-			<xs:element name="discountAmount" type="Money" minOccurs="0"/>
-			<xs:element name="adServingFee" type="Money" minOccurs="0"/>
-			<xs:element name="taxAmount" type="Tax" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="totalGrossAmount" type="Money" minOccurs="0"/>
-			<xs:element name="totalNetAmount" type="Money" minOccurs="0"/>
-			<xs:element name="totalAmountDue" type="Money"/>
-			<xs:element name="paymentTerms" type="PaymentTerms" minOccurs="0"/>
-			<xs:element name="paymentDueDate" type="xs:date"/>
-			<xs:element name="paymentInstructions">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="payee" type="Name"/>
-						<xs:element name="paymentAddress" type="PostalAddress"/>
-						<xs:element name="wireTransferInformation" minOccurs="0">
+						<xs:element name="invoiceDate" type="xs:date"/>
+						<xs:element name="billTo" type="Person"/>
+						<xs:element name="billingPeriod" type="TimeSpan"/>
+						<xs:element name="seller" type="Transactor"/>
+						<xs:element name="buyer" type="Transactor"/>
+						<xs:element name="advertiser" type="Transactor"/>
+						<xs:element name="campaignName" type="Name"/>
+						<xs:element name="flightDates" type="TimeSpan"/>
+						<xs:element name="insertionOrder" type="Order">
+							<xs:annotation>
+								<xs:documentation>TODO: should we enable more than one IO to be billed in an invoice?</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="lineItems">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="accountNumber"/>
-									<xs:element name="bankName"/>
-									<xs:choice>
-										<xs:element name="abaNumber"/>
-										<xs:element name="swiftCode"/>
-									</xs:choice>
+									<xs:element name="lineItem" type="InvoiceLineItem" maxOccurs="unbounded"/>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
+						<xs:element name="buyerCommission" type="Money" minOccurs="0"/>
+						<xs:element name="discountAmount" type="Money" minOccurs="0"/>
+						<xs:element name="adServingFee" type="Money" minOccurs="0"/>
+						<xs:element name="taxAmount" type="Tax" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="totalGrossAmount" type="Money" minOccurs="0"/>
+						<xs:element name="totalNetAmount" type="Money" minOccurs="0"/>
+						<xs:element name="totalAmountDue" type="Money"/>
+						<xs:element name="paymentTerms" type="PaymentTerms" minOccurs="0"/>
+						<xs:element name="paymentDueDate" type="xs:date"/>
+						<xs:element name="paymentInstructions">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="payee" type="Name"/>
+									<xs:element name="paymentAddress" type="PostalAddress"/>
+									<xs:element name="wireTransferInformation" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="accountNumber"/>
+												<xs:element name="bankName"/>
+												<xs:choice>
+													<xs:element name="abaNumber"/>
+													<xs:element name="swiftCode"/>
+												</xs:choice>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="notes" type="Note" minOccurs="0"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="notes" type="Note" minOccurs="0"/>
-			<xs:element name="systemInformation" type="SystemInformation"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="InvoiceLineItem">
@@ -79,29 +76,34 @@
 			<xs:documentation>data type representing a line item in an invoice</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="sequenceNumber" type="xs:nonNegativeInteger"/>
-			<xs:element name="identifier" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="name" type="Name"/>
-			<xs:element name="billingPeriod" type="TimeSpan"/>
-			<xs:element name="orderLineItem" type="OrderLineItem"/>
-			<xs:element name="rate">
+			<xs:element name="reference" type="ObjectReference"/>
+			<xs:element name="instance" minOccurs="0">
 				<xs:complexType>
-					<xs:complexContent>
-						<xs:extension base="Rate">
-							<xs:sequence/>
-						</xs:extension>
-					</xs:complexContent>
+					<xs:sequence>
+						<xs:element name="sequenceNumber" type="xs:nonNegativeInteger"/>
+						<xs:element name="billingPeriod" type="TimeSpan"/>
+						<xs:element name="orderLineItem" type="OrderLineItem"/>
+						<xs:element name="rate">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="Rate">
+										<xs:sequence/>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="contractedUnits" type="Quantity"/>
+						<xs:element name="isGuaranteed" type="xs:boolean"/>
+						<xs:element name="deliveredUnits" type="Quantity"/>
+						<xs:element name="billableUnits" type="Quantity"/>
+						<xs:element name="grossAmount" type="Money" minOccurs="0"/>
+						<xs:element name="netAmount" type="Money"/>
+						<xs:element name="adServingFee" type="Money" minOccurs="0"/>
+						<xs:element name="taxAmount" type="Tax" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="notes" type="Note" minOccurs="0"/>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="contractedUnits" type="Quantity"/>
-			<xs:element name="isGuaranteed" type="xs:boolean"/>
-			<xs:element name="deliveredUnits" type="Quantity"/>
-			<xs:element name="billableUnits" type="Quantity"/>
-			<xs:element name="grossAmount" type="Money" minOccurs="0"/>
-			<xs:element name="netAmount" type="Money"/>
-			<xs:element name="adServingFee" type="Money" minOccurs="0"/>
-			<xs:element name="taxAmount" type="Tax" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="notes" type="Note" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

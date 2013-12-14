@@ -13,71 +13,68 @@
 			<xs:documentation>This is the insertion order data type</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name" type="Name"/>
-			<xs:element name="orderNumber">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="25"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-			<xs:element name="version" type="xs:short" minOccurs="0"/>
-			<xs:element name="orderDate" type="xs:date"/>
-			<xs:element name="buyer" type="Transactor"/>
-			<xs:element name="seller" type="Transactor"/>
-			<xs:element name="advertiser" type="Transactor"/>
-			<xs:element name="advertiserBrandName" type="Name" minOccurs="0"/>
-			<xs:element name="advertiserBrandId" type="Identifier" minOccurs="0"/>
-			<xs:element name="lineItems">
+			<xs:element name="reference" type="ObjectReference"/>
+			<xs:element name="instance" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="lineItem" type="OrderLineItem" maxOccurs="unbounded"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="flightDates" type="TimeSpan">
-				<xs:annotation>
-					<xs:documentation>The earliest start date and the latest end date for all line items in this order.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="amount" type="Money"/>
-			<xs:element name="eCPM" type="Rate" minOccurs="0"/>
-			<xs:element name="terms">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="financial">
+						<xs:element name="orderDate" type="xs:date"/>
+						<xs:element name="buyer" type="Transactor"/>
+						<xs:element name="seller" type="Transactor"/>
+						<xs:element name="advertiser" type="Transactor"/>
+						<xs:element name="advertiserBrandName" type="Name" minOccurs="0"/>
+						<xs:element name="advertiserBrandId" type="Identifier" minOccurs="0"/>
+						<xs:element name="lineItems">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="paymentTerms" type="PaymentTerms"/>
-									<xs:element name="billingFrequency" default="monthly">
-										<xs:simpleType>
-											<xs:restriction base="xs:string">
-												<xs:enumeration value="weekly"/>
-												<xs:enumeration value="monthly"/>
-												<xs:enumeration value="quarterly"/>
-											</xs:restriction>
-										</xs:simpleType>
-									</xs:element>
-									<xs:element name="systemOfRecord" default="advertiser">
-										<xs:simpleType>
-											<xs:restriction base="xs:string">
-												<xs:enumeration value="advertiser"/>
-												<xs:enumeration value="publisher"/>
-											</xs:restriction>
-										</xs:simpleType>
-									</xs:element>
-									<xs:element name="agencyCommission" type="Discount" minOccurs="0"/>
-									<xs:element name="discount" type="Discount" minOccurs="0" maxOccurs="unbounded"/>
-									<xs:element name="notes" type="Note" minOccurs="0"/>
+									<xs:element name="lineItem" type="OrderLineItem" maxOccurs="unbounded"/>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
-						<xs:element name="legal" type="LegalTerms"/>
+						<xs:element name="flightDates" type="TimeSpan">
+							<xs:annotation>
+								<xs:documentation>The earliest start date and the latest end date for all line items in this order.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="amount" type="Money"/>
+						<xs:element name="eCPM" type="Rate" minOccurs="0"/>
+						<xs:element name="terms">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="financial">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="paymentTerms" type="PaymentTerms"/>
+												<xs:element name="billingFrequency" default="monthly">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="weekly"/>
+															<xs:enumeration value="monthly"/>
+															<xs:enumeration value="quarterly"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="systemOfRecord" default="advertiser">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="advertiser"/>
+															<xs:enumeration value="publisher"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="agencyCommission" type="Discount" minOccurs="0"/>
+												<xs:element name="discount" type="Discount" minOccurs="0" maxOccurs="unbounded"/>
+												<xs:element name="notes" type="Note" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="legal" type="LegalTerms"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="notes" type="Note" minOccurs="0"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="notes" type="Note" minOccurs="0"/>
-			<xs:element name="systemInformation" type="SystemInformation" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="OrderLineItem">
@@ -85,120 +82,119 @@
 			<xs:documentation>a line item in an insertion order</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="sequenceNumber" type="xs:int">
-				<xs:annotation>
-					<xs:documentation>The order in which this line appear in the order</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="name" type="Name"/>
-			<xs:element name="identifiers" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:choice>
-				<xs:element name="placement">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="program">
-								<xs:annotation>
-									<xs:documentation>The advertising program. E.g. "AutoTrader.com"</xs:documentation>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="id" type="xs:IDREF" minOccurs="0"/>
-										<xs:element name="name"/>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="product" type="Product">
-								<xs:annotation>
-									<xs:documentation>The Program's product. E.g. "Sedan's section 300x250"</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="dayparts" type="DayPartSchedule" minOccurs="0">
-								<xs:annotation>
-									<xs:documentation>optional dayparting schedule</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="targeting" minOccurs="0">
-								<xs:annotation>
-									<xs:documentation>Additional targeting options. E.g. "gender=female" and "income>$100,000" TODO: data structure.</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="creative" minOccurs="0">
-								<xs:annotation>
-									<xs:documentation>creative tags or assets can optionally be included in the order.</xs:documentation>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="tag" type="AdTag" minOccurs="0" maxOccurs="unbounded"/>
-										<xs:element name="file" type="File" minOccurs="0" maxOccurs="unbounded"/>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="package" minOccurs="0">
-								<xs:annotation>
-									<xs:documentation>If this placement is part of a package</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="package" type="PackageType"/>
-			</xs:choice>
-			<xs:element name="testingStartDate" type="xs:dateTime" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>During the testing period, the ad server serves impressions to the placement as if it your ads were already running on the publisher's site. However, reports for the testing period will show the associated media cost and eCPM for these impressions as zero.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="flightDates" type="TimeSpan">
-				<xs:annotation>
-					<xs:documentation>The earliest start date and latest end date for this line item.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="flights" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Optional for flighting.</xs:documentation>
-				</xs:annotation>
+			<xs:element name="reference" type="ObjectReference"/>
+			<xs:element name="instance" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="flight">
+						<xs:element name="sequenceNumber" type="xs:int">
+							<xs:annotation>
+								<xs:documentation>The order in which this line appear in the order</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:choice>
+							<xs:element name="placement">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="program" type="Program">
+											<xs:annotation>
+												<xs:documentation>The advertising program. E.g. "AutoTrader.com"</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="product" type="Product">
+											<xs:annotation>
+												<xs:documentation>The Program's product. E.g. "Sedan's section 300x250"</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="dayparts" type="DayPartSchedule" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>optional dayparting schedule</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="targeting" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Additional targeting options. E.g. "gender=female" and "income>$100,000" TODO: data structure.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="creative" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>creative tags or assets can optionally be included in the order.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="tag" type="AdTag" minOccurs="0" maxOccurs="unbounded"/>
+													<xs:element name="file" type="File" minOccurs="0" maxOccurs="unbounded"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="package" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>If this placement is part of a package</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="package" type="PackageType"/>
+						</xs:choice>
+						<xs:element name="testingStartDate" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>During the testing period, the ad server serves impressions to the placement as if it your ads were already running on the publisher's site. However, reports for the testing period will show the associated media cost and eCPM for these impressions as zero.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="flightDates" type="TimeSpan">
+							<xs:annotation>
+								<xs:documentation>The earliest start date and latest end date for this line item.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="flights" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Optional for flighting.</xs:documentation>
+							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="flightDates" type="TimeSpan" maxOccurs="unbounded"/>
-									<xs:element name="quantity"/>
-									<xs:element name="rate" type="Rate"/>
-									<xs:element name="amount" type="Money"/>
-									<xs:element name="notes" type="Note" minOccurs="0"/>
+									<xs:element name="flight">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="flightDates" type="TimeSpan" maxOccurs="unbounded"/>
+												<xs:element name="quantity"/>
+												<xs:element name="rate" type="Rate"/>
+												<xs:element name="amount" type="Money"/>
+												<xs:element name="notes" type="Note" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
+						<xs:element name="quantity" type="Quantity" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>optional if placement is part of package</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="isGuaranteed" type="xs:boolean">
+							<xs:annotation>
+								<xs:documentation>True if this line item's quantity is guaranteed. False otherwise. Optional if placement is part of package.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="deliveryPolicy" type="DeliveryPolicy" minOccurs="0"/>
+						<xs:element name="frequencyCap" type="FrequencyCap" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="rate" type="Rate" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>optional if placement is part of package</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="discount" type="Discount" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="discountCode" type="DiscountCode" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="amount" type="Money" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>optional if placement is part of package</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="notes" type="Note" minOccurs="0"/>
+						<xs:element name="status" type="LineItemStatus" minOccurs="0"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="quantity" type="Quantity" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>optional if placement is part of package</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="isGuaranteed" type="xs:boolean">
-				<xs:annotation>
-					<xs:documentation>True if this line item's quantity is guaranteed. False otherwise. Optional if placement is part of package.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="deliveryPolicy" type="DeliveryPolicy" minOccurs="0"/>
-			<xs:element name="frequencyCap" type="FrequencyCap" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="rate" type="Rate" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>optional if placement is part of package</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="discount" type="Discount" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="discountCode" type="DiscountCode" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="amount" type="Money" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>optional if placement is part of package</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="notes" type="Note" minOccurs="0"/>
-			<xs:element name="status" type="LineItemStatus" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="DayParts">

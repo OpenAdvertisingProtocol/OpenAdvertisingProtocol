@@ -12,39 +12,50 @@
 			<xs:documentation>this data type represents an advertising program</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name" type="Name"/>
-			<xs:element name="seller" type="Transactor"/>
-			<xs:element name="identifier" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="lastUpdated" type="xs:dateTime"/>
-			<xs:element name="description" type="Note" minOccurs="0"/>
-			<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
-			<xs:element name="product" type="Product" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="channel" type="Channel" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="monthlyUniques" type="xs:long" minOccurs="0"/>
-			<xs:element name="document" type="File" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="profile" type="AudienceProfile" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="endorsement" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="reference" type="ObjectReference"/>
+			<xs:element name="instance" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Program instance data is optional only when passing a Program as a reference. Otherwise, this is required.</xs:documentation>
+				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="endorser" type="Person"/>
-						<xs:element name="timestamp" type="xs:dateTime"/>
-						<xs:element name="notes" minOccurs="0"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="standardTerms" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="legal" type="LegalTerms" minOccurs="0"/>
-						<xs:element name="minimumBuy" type="Money" minOccurs="0"/>
-						<xs:element name="cancellationFee" type="Money" minOccurs="0"/>
-						<xs:element name="leadTime" type="xs:short" minOccurs="0">
+						<xs:element name="seller" type="Transactor"/>
+						<xs:element name="description" type="Note" minOccurs="0"/>
+						<xs:element name="url" type="xs:anyURI" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>The number of days of lead time required for this order in advance of start date</xs:documentation>
+								<xs:documentation>The URL of the website if this is an online display program.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="orderInstructions" type="Note"/>
+						<xs:element name="product" type="Product" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="channel" type="Channel" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="monthlyUniques" type="xs:long" minOccurs="0"/>
+						<xs:element name="profile" type="AudienceProfile" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="document" type="File" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="endorsement" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="endorser" type="Person"/>
+									<xs:element name="timestamp" type="xs:dateTime"/>
+									<xs:element name="notes" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="standardTerms" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="legal" type="LegalTerms" minOccurs="0"/>
+									<xs:element name="minimumBuy" type="Money" minOccurs="0"/>
+									<xs:element name="cancellationFee" type="Money" minOccurs="0"/>
+									<xs:element name="leadTime" type="xs:short" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>The number of days of lead time required for this order in advance of start date</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="orderInstructions" type="Note"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -115,47 +126,55 @@
 			<xs:documentation>this data type represents a product within an advertising program</xs:documentation>
 		</xs:annotation>
 		<xs:sequence minOccurs="1" maxOccurs="1">
-			<xs:element name="name" type="Name"/>
-			<xs:element name="identifier" type="Identifier" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="description" type="Note" minOccurs="0"/>
-			<xs:element name="channel" type="Channel"/>
-			<xs:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="profile" type="AudienceProfile" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="adUnit" type="AdUnit" maxOccurs="unbounded"/>
-			<xs:element name="standardRate" type="Rate" minOccurs="0"/>
-			<xs:element name="ourRate" type="Rate" minOccurs="0">
+			<xs:element name="reference" type="ObjectReference"/>
+			<xs:element name="instance" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>negotiated rate for the user that is accessing this placement.</xs:documentation>
+					<xs:documentation>Product instance data is optional only when passing a Product as a reference. Otherwise, this is required.</xs:documentation>
 				</xs:annotation>
-			</xs:element>
-			<xs:element name="inventoryAvailable" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="period" type="TimeSpan" minOccurs="0"/>
-						<xs:element name="quantity" type="Quantity" maxOccurs="unbounded"/>
+						<xs:element name="minimumLeadTimeDays" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The number of days the order has to be finalized in advance of the delivery start date.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="description" type="Note" minOccurs="0"/>
+						<xs:element name="channel" type="Channel"/>
+						<xs:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="profile" type="AudienceProfile" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="adUnit" type="AdUnit" maxOccurs="unbounded"/>
+						<xs:element name="standardRate" type="Rate" minOccurs="0"/>
+						<xs:element name="ourRate" type="Rate" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>negotiated rate for the user that is accessing this placement.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="inventoryAvailable" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="period" type="TimeSpan" minOccurs="0"/>
+									<xs:element name="quantity" type="Quantity" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="profile" type="AudienceProfile" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="targeting" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The targeting options available for this placement. TODO: define this!</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="minimumPurchase" type="Money" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The minimum amount this product can be purchased for.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="minimumDurationDays" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The minimum number of days in the duration of delivery start date to end date.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="profile" type="AudienceProfile" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="targeting" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>The targeting options available for this placement. TODO: define this!</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="minimumPurchase" type="Money" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>The minimum amount this product can be purchased for.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="minimumDurationDays" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>The minimum number of days in the duration of delivery start date to end date.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="minimumLeadTimeDays" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>The number of days the order has to be finalized in advance of the delivery start date.</xs:documentation>
-				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
