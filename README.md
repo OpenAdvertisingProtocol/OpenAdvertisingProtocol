@@ -19,7 +19,7 @@ to update the status of those orders.
 
 ### Seller API
 
-The [OAP Seller API](http://docs.oapsellerapi.apiary.io/) is the interface buyers use to connect with sellers. Buyers can use this
+The [OAP Seller API](http://docs.oapseller.apiary.io/) is the interface buyers use to connect with sellers. Buyers can use this
 to get up-to-the-minute information on advertising programs, inventory, and pricing. Buyers can use it to place orders
 witn the seller, to modify orders, and to get current status of orders.
 
@@ -33,9 +33,9 @@ XML schemas. Beyond obvious application with XML documents, the model is also in
 Status
 ------
 
-As of November 15, 2013, the OAP is still very early stage.  The plan is to finalize the minimum viable product 
+As of December 18, 2013, the OAP is still in development.  The plan is to finalize the minimum viable product 
 protocol (as shown in the [overview diagram](https://github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/Programmatic-Direct-Open-Advertising-Protocol.pdf?raw=true)) 
-December 2014 and to complete initial reference implementations in February 2014.
+January 2014 and to complete initial reference implementations in March 2014.
 
 Beyond that, we plan to complete the invoice and other parts of the protocol in stages.
 
@@ -48,3 +48,16 @@ Participating Organizations
 * [iSocket](https://www.isocket.com/)
 * [Operative](http://www.operative.com/)
 * [Yieldex](http://www.yieldex.com/)
+
+... and growing! Please let us know if you want to participate.
+
+How to contribute
+-----------
+
+Follow Github's [recommended workflow](https://help.github.com/articles/fork-a-repo) for contributing to this project.
+
+1. Fork it
+2. Create your feature branch (`git checkout -b your-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin your-new-feature`)
+5. Create new Pull Request
