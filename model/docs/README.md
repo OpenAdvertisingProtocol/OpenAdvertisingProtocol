@@ -2,34 +2,22 @@ Model Documentation
 =======================
 
 The best way to understand the object model is to open the [XSD Files](https://github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/tree/master/model/schemas) 
-in an XML Schema editor. These tools make it easy to navigate the schema and drill into the details.
+in an XML Schema editor. These tools make it easy to navigate the schema and drill into the details. We **strongly** recommend you view with an XML Schema Editor. You will find [instructions here](https://github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/tree/master/model/schemas).
 
-If you don't have access to a schema editor, this directory contains some generated documentation.
+However, if you don't have access to a schema editor, here is documentation in Microsoft Word format that will help you understand the objects in the OAP.
 
-Diagrams
---------
-These diagrams that illustrate the structure of the key complex types in the model:
+Primary Schemas
+---------------
 
-1. [Program](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/master/model/docs/program.png) - the structure of an advertising program
-2. [Order](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/master/model/docs/order.png) - the structure of an insertion order
-
-HTML documentation
-------------------
-I'm kind of disappointed with the quality of the documentation that XML Spy produces. It's ugly. Can anyone suggest
-a better documentation generator?
-
-If you are viewing this on github, clicking on the files in the github repository above are not very friendly because it gives you the HTML code 
-instead of a rendered page. I found [a little trick](http://stackoverflow.com/questions/8446218/how-to-see-an-html-page-on-github-as-a-normal-rendered-html-page-to-see-preview) to render these files as HTML pages. You just prefix the 
-github URL with "http://htmlpreview.github.com/?" I.e.  http://htmlpreview.github.com/?https://github.com/...
-
-Here is the HTML documentation for
-
-1. [Common](http://htmlpreview.github.io/?https://github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/common.html) - a bunch of basic data types used in both Program and Order
-2. [Program](http://htmlpreview.github.com/?https://github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/program.html) - the details on advertising program
-3. [Order](http://htmlpreview.github.com/?https://github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/order.html) - the details on insertion orders
-
-Microsoft Word Documentation
-----------------------------
-1. [Common](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/common.doc)
-2. [Program]()
+1. [Program](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/common.doc)
+2. [RFP](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/rfp.doc)
+3. [Proposal](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/proposal.doc)
 3. [Order](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/order.doc)
+4. [Invoice](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/invoice.doc)
+5. [Payment](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/payment.doc)
+
+Supporting Schemas
+------------------
+1. [Common](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/common.doc)
+2. [Currency Codes](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/currencyCode.doc)
+3. [Media Types](https://raw.github.com/OpenAdvertisingProtocol/OpenAdvertisingProtocol/blob/master/model/docs/mediaType.doc)
